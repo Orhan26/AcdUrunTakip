@@ -1,0 +1,775 @@
+﻿@using ACD_Urun_Takip.Extensions
+@model ACD_Urun_Takip.Models.DefineTable
+
+@{
+    ViewBag.Title = "Tanımlama Sayfası";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- DataTables -->
+<link rel="stylesheet" href="~/assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="~/assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+<link rel="stylesheet" href="~/assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+<link href="~/assets/plugins/_datatables/extensions/TableTools/css/dataTables.tableTools.min.css" rel="stylesheet" />
+
+<script src="~/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="~/assets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="~/assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="~/assets/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="~/assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="~/assets/plugins/jszip/jszip.min.js"></script>
+<script src="~/assets/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="~/assets/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="~/assets/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="~/assets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="~/assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<script src="~/assets/plugins/_datatables/extensions/TableTools/js/dataTables.tableTools.min.js"></script>
+
+<!--Confirm-->
+<link href="~/assets/plugins/jquery-confirm/css/jquery-confirm.css" rel="stylesheet" />
+<script src="~/assets/plugins/jquery-confirm/js/jquery-confirm.js"></script>
+
+<!--miniColor-->
+<link href="~/assets/plugins/jquery-minicolors/jquery.minicolors.css" rel="stylesheet" />
+<script src="~/assets/plugins/jquery-minicolors/jquery.minicolors.js"></script>
+
+<!-- InputMask -->
+<script src="~/assets/plugins/moment/moment.min.js"></script>
+
+<!--Picker-->
+<link href="~/assets/plugins/jquery-timepicker/timepicker.css" rel="stylesheet" />
+<script src="~/assets/plugins/jquery-timepicker/jquery.timepicker.js"></script>
+<a href="~/assets/plugins/jquery-timepicker/jquery.timepicker.min.css.map"></a>
+
+<input type="text" style="display:none;" value="@Url.Action("Action","Define")" id="urlnoid" />
+<input type="text" style="display:none;" value="@Url.Action("Action","Define",new { tablename="temp"})" id="urlid" />
+
+
+<style>
+    .timepicker {
+        z-index: 1151 !important;
+    }
+
+    .datetimepicker {
+        z-index: 1;
+        position: relative;
+    }
+
+    .modal-title {
+        font-size: 1.2rem;
+    }
+
+    .col-upload {
+        background-color: rgba(0,0,0,.1);
+        border: 2px dashed;
+        border-radius: 3px;
+        position: relative;
+        text-align: center;
+        margin-bottom: 15px;
+        /*opacity: 0;
+        filter: alpha(opacity=0);*/
+        padding: 70px 10px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .thumbnail {
+        float: right;
+        width: 150px;
+        height: 150px;
+    }
+
+        .thumbnail img {
+            width: 100%;
+        }
+</style>
+
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <ol class="breadcrumb">
+                    <li class="hidden-xs breadcrumb-item">
+                        <a href="@Url.Action("Index","Home")">@Html.GetLang("AnaSayfa")</a>
+                    </li>
+
+                    <li class="hidden-xs breadcrumb-item">
+                        <a href="#">@Html.GetLang("Tanımlama")</a>
+                    </li>
+                    <li class="breadcrumb-item active">
+                        <a href="#" id="export_title">@(Model?.Caption) - @(Model?.Menu)</a>
+                    </li>
+                    <li style="padding-left:.5rem;display:inline-block;">
+                        <a href="#" id="addbookmark" data-id="@Model?.Menu" data-toggle="tooltip" data-placement="right" title="" data-original-title="Bu Sayfayı Sık Kullanılan Sayfalarıma Ekle"><i class="fa fa-bookmark @(Model?.IsBookMark==false?"bookmark-active":"")"></i></a>
+                    </li>
+                </ol>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item">
+                        <div class="btn-group btn-action">
+                            <button type="button" class="btn btn-outline-primary dropdown-toggle btn-sub-action" data-toggle="dropdown">
+                                <i class="fa fas fa-ellipsis-v"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                <a class="dropdown-item" href="javascript:Create()"><i class="fas fa-plus action-icon"></i>Yeni</a>
+                                <a class="dropdown-item" href="javascript:Edit()" ><i class="far fa-edit action-icon"></i>Düzenle</a>
+                                <a class="dropdown-item" href="javascript:EditSelected()"><i class="far fa-edit action-icon"></i>Çoklu Düzenle</a>
+                                <a class="dropdown-item" href="javascript:selectall()" title="Tümünü Seç"><i class="fas fa-check action-icon"></i>Tümünü Seç</a>
+                                <a class="dropdown-item" href="javascript:Delete()" title="Seçilenleri Sil"><i class="far fa-trash-alt action-icon"></i>Sil</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" id="uploadDataBtn" href="#"><i class="fa  fa-upload action-icon"></i>@Html.GetLang("VeriYükle")</a>
+                                <a class="dropdown-item" id="exportToExcelBtn" href="#"><i class="fa  fa-upload action-icon"></i>@Html.GetLang("Excele Aktar")</a>
+                                <a class="dropdown-item" id="exportToPdfBtn" href="#"><i class="fa  fa-upload action-icon"></i>@Html.GetLang("Pdfe Aktar")</a>
+                            </div>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content content-define">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header" style="background-color:#ddd;">
+                        @*<h3 class="card-title">@Model.Caption</h3>*@
+                    </div>
+                    <div class="card-body">
+                        @Html.Action("Tbody", "Define", new { tablename = Model.Name })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--Update Modal-->
+<!--TODO:updateModal ismi değişti(gameModal:updateModal)-->
+<div id="updateModal" class="modal fade" style="z-index:10002; " role="dialog" data-url='@Url.Action("Create","Define",new {tablename="temp" })' lang="tr">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content" style="border-radius:24px;">
+            <div class="modal-header" style="background-color: #337ab7;border-top-right-radius: 23px;border-top-left-radius: 23px;color: white;">
+                <h4 class="modal-title">@Model.Caption @Html.GetLang("Düzenleme")</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body" id='updateModalContainer'>
+            </div>
+            <div class="modal-footer" style="display:none;">
+                <input type="text" style="display:none;" id="updatecontrol" />
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!--Create Modal-->
+<div id="modalForNewCreate" class="modal fade" role="dialog" data-url='@Url.Action("Create","Define",new {tablename=Model.Name })' lang="tr" style="z-index:10002">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content" style="border-radius:24px;">
+            <div class="modal-header" style="background-color: #337ab7;border-top-right-radius: 23px;border-top-left-radius: 23px;color: white;">
+                <h4 class="modal-title">@Html.GetLang("Yeni") @Model.Caption</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body" id='modalForNewCreateContainer'>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Multi Update Modal-->
+<div id="modalForNewUpdate" class="modal fade" role="dialog" data-url='@Url.Action("Create","Define",new {tablename=Model.Name })' lang="tr">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content" style="border-radius:24px;">
+            <div class="modal-header" style="background-color: #337ab7;border-top-right-radius: 23px;border-top-left-radius: 23px;color: white;">
+                <h4 class="modal-title">@Html.GetLang("Toplu") @Model.Caption</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body" id='modalForNewUpdateContainer'>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!--Image Upload Modal-->
+<div id="imageuploadmodal" class="modal fade" role="dialog" lang="tr" style="z-index:10003">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content" style="border-radius:24px;">
+            <div class="modal-header" style="background-color: #337ab7;border-top-right-radius: 23px;border-top-left-radius: 23px;color: white;">
+                <h4 class="modal-title">Resim Yükle</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+
+                @using (Html.BeginForm("UploadImage", "Define", FormMethod.Post, new { enctype = "multipart/form-data", id = "form_image" }))
+                {
+                    <div class="row">
+                        <div class="col-md-6 col-upload">
+                            @Html.AntiForgeryToken()
+                            <div class="fileinput fileinput-new" data-provides="fileinput">
+                                <div>
+                                    @*<span class="btn default btn-file">*@
+                                    @*<span class="fileinput-new">Resim Seçin</span>
+                                        <span class="fileinput-exists">Değiştir</span>*@
+                                    <input type="file" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff | images/*" name="upload" class="input-upload">
+                                    @*</span>*@
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="fileinput-new thumbnail">
+                                <img id="imgThumbnail" default-src="~/assets/img/noimage.png" src="~/assets/img/noimage.png" alt="" />
+                            </div>
+                        </div>
+                        <div class="col-md-12" style="float:right;">
+                            <input type="submit" class="btn btn-primary pull-right" value="Gönder" />
+                            <a href="javascript:removeImage();" class="btn red fileinput-exists pull-right" data-dismiss="fileinput" style="margin-right:10px;">Sil</a>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!--Responsive Show Image-->
+<div id="responsive" class="modal fade" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="border:none!important;">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <img src="" width="100%" id="imageresponsive" height="100%" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var updateArr = [];
+    var insertedMaterialId;
+    var OrderList = "True";
+
+    $.ajaxPrefilter(function (options, originalOptions, jqXHR) {
+        options.async = true;
+    });
+
+    $.ajaxSetup({ cache: false });
+
+    $(function () {
+        $(document).on("mousewheel", ':input[type=number]', function (e) { $(this).blur(); });
+    });
+
+    //Upload image Begin
+    $(document).on("click", "#uploadImage", function () {
+        if (isNotEmpty($("#tempimage").attr("src"))) {
+            var src = $("#tempimage").attr("src");
+            $('#imgThumbnail').attr('src',src);
+        }
+        $("#imageuploadmodal").modal("show");
+
+    });
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#imgThumbnail').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]); // convert to base64 string
+        }
+    }
+
+    function removeImage()
+    {
+        $('#imgThumbnail').attr('src', $('#imgThumbnail').attr('default-src'));
+    }
+
+    $('input[type=file]').change(function () {
+        readURL(this);
+    });
+
+    //Load image
+    $(document).on("submit", "#form_image", function (t) {
+        t.preventDefault();
+        var headers = {};
+        var token = $('#form_image input[name="__RequestVerificationToken"]').val();
+        headers['__RequestVerificationToken'] = token;
+        var url = $(this).attr("action")
+        $.ajax({
+            url: url,
+            //headers: headers,
+            type: 'POST',
+            data: new FormData(this),
+            processData: !1,
+            contentType: !1,
+            error: function (error) {
+                //console.log("error");
+                //TODO:yüklenemedi hatası verilmeli!
+            },
+            success: function (result) {
+                $("#hiddenimage").val(result.Code);
+                var src = '@Url.Action("GetImage","Define",new {id="temp"})';
+                var src = src.replace("temp", result.Code);
+                $("#tempimage").attr("src", src);
+                $("#hiddenimage").val(result.Code);
+                $("#imageuploadmodal").modal("toggle");
+
+            }
+        });
+    })
+
+    //list image click
+    $(document).on("click", ".a-image", function () {
+        event.preventDefault();
+        var id = $(this).data("id");
+        var temp = '@Url.Action("GetImage","Define",new{id="temp"})';
+        var src = temp.replace("temp", id);
+        $("#imageresponsive").attr("src", src);
+        $("#responsive").modal("show");
+    })
+
+    //Enable
+    $(document).on("click", ".enable", function () {
+        var temp = $(this).closest("label").attr("for");
+        if ($(this).is(':checked')) {
+            $("input[name^=" + temp + "]").attr("disabled", false);
+            $("select[name^=" + temp + "]").attr("disabled", false);
+        }
+        else {
+            $("input[name^=" + temp + "]").attr("disabled", true);
+            $("select[name^=" + temp + "]").attr("disabled", true);
+
+        }
+    });
+
+     function ShowMessage(msg)
+        {
+            toastr.error(msg.Message, '@Html.GetLang("Hata")', { timeOut: 20000, closeButton: true });
+                    toastr.info('@Html.GetLang("Buhataileilgiliçözümügörmekiçintıklayınız")', 'Help', {
+                        closeButton: true, timeOut: 20000, onclick: function () {
+                            window.location.href = msg.Help;
+                        }
+            });
+        }
+
+    //Create Modal
+    function Create() {
+        $('#defineForm').remove();
+        var url = $('#modalForNewCreate').data('url');
+
+        $.get(url, function (data) {
+            if (isNotEmpty(data.Success) && data.Success == false) {
+                toastr.error(data.Message, '@Html.GetLang("Hata")', { timeOut: 20000, closeButton: true });
+            }
+            else {
+                $('#modalForNewCreateContainer').html(data);
+                $("#defineForm input[type=checkbox].enable").css("display", "none");
+                $('#modalForNewCreate').modal('show');
+            }
+
+        });
+
+    }
+
+    //Insert Data
+    $(document).on("click", "#insert", function () {
+        var count = 0;
+
+        $('.EmptyCheck').each(function (index, item) {
+
+            var itemType = $(item).get(0).tagName;
+            switch (itemType) {
+                case "INPUT":
+                    if (($(this).attr("name").indexOf("?") == -1) && $(this).val() == "") {
+                        var inputName = $(this).attr("name").split('/')[0];
+                        toastr.warning($(this).siblings("label[for='" + inputName + "']").text() + " alanı boş bırakılamaz!");
+                        count = 1;
+                        return false;
+                    }
+                    break;
+                case "SELECT":
+                    var name = $(this).attr("name").split('/')[0];
+                    if (name == "Ord_MaterialID") { //TODO:IPM_5 taşınma ihtimali için kaldırılmadı.
+                        insertedMaterialId = $(this).val();
+                    }
+                    if (name != undefined) {
+                        if ($(this).attr("name").indexOf("?") == -1 && $(this).val() == 0 && $(this).attr("name").indexOf("bool") == -1) {
+                            var inputName = $(this).attr("name").split('/')[0];
+                            toastr.warning($(this).siblings("label[for='" + inputName + "']").text() + " alanı boş bırakılamaz!");
+                            count = 1;
+                            return false;
+                        }
+                    }
+                    break;
+            }
+
+            if (count == 1) {
+                return false;
+            }
+        });
+
+        if (count == 1) {
+            return false;
+        }
+
+        var headers = {};
+        var token = $('input[name="__RequestVerificationToken"]').val();
+        headers['__RequestVerificationToken'] = token;
+
+        $.ajax({
+            headers: headers,
+            url: $("#defineForm").attr("action"),
+            data: $("#defineForm").serialize(),
+            type: 'POST',
+            error: function (error) {
+                toastr.error(error);
+            },
+            success: function (result) {
+
+                if (result.Code != null || result.Code != 0) {
+                    toastr.success(result.Message);
+
+                    var url = $("#urlnoid").val().replace("Action", "GetRow");
+                    $.ajax({
+                        url: url,
+                        headers: headers,
+                        type: 'POST',
+                        data: {
+                        "GID": result.Guid,
+                        "TableName": '@(Model.Name)'
+                         },
+                        error: function (error) {
+                           //
+                        },
+                        success: function (data) {
+                            if ($("#defineTbl >tbody>tr:first td").length == 1)
+                                location.reload();
+                            else
+                                $("#modalForNewCreate").modal("hide");
+                            RefreshTbody();
+                        }
+                    });
+                }
+                else {
+                    ShowMessage(result);
+                }
+            }
+        });
+    });
+
+    function Edit()
+    {
+        var str = "";
+        if ($("#defineTbl>tbody>tr.tr-selected").length == 0) {
+            toastr.warning("Kayıt Düzenlemek için  satır seçiniz.");
+            return false;
+        }
+        else if ($("#defineTbl>tbody>tr.tr-selected").length > 1) {
+            toastr.warning("Kayıt Düzenlemek için tek satır seçiniz.");
+            return false;
+        }
+
+        var id = $("#defineTbl>tbody>tr.tr-selected").find("td:eq(1)").text();
+        var tname = '@Model.Name';
+
+        var headers = {};
+        var token = $('input[name="__RequestVerificationToken"]').val();
+        headers['__RequestVerificationToken'] = token;
+        $.ajax({
+            url: "@Url.Action("GetRowForUpdate","Define")?tablename=" + tname,
+            headers: headers,
+            data: {"GuID": id},
+            type: 'GET',
+            error: function (error) {
+                //console.log(error)
+            },
+            success: function (data) {
+                if (isNotEmpty(data.Success) && data.Success == false) {
+                    toastr.error(data.Message, '@Html.GetLang("Hata")', { timeOut: 20000, closeButton: true });
+                    return false;
+                }
+
+                $('#updateModalContainer').html(data);
+                $("#defineForm input[type=checkbox]").css("display", "none");
+
+                $.ajax({
+                    url: $("#urlnoid").val().replace("Action", "GetRow"),
+                    headers: headers,
+                    data: {"GID": id,"TableName": '@Model.Name'},
+                    type: 'POST',
+                    error: function () {
+                        //console.log("hata");
+                    },
+                    success: function (result) {
+                        for (var i = 0; i < result.length; i++) {
+                            if (result[i].Key.match(/ImageID$/)) {
+                                var src = '@Url.Action("GetImage","Define",new {id="temp"})';
+                                var src = src.replace("temp", result[i].Value);
+                                $("#hiddenimage").val(result[i].Value);
+                                if (result[i].Value != 0) {
+                                    $("#tempimage").attr("src", src);
+                                    $("#tempimage").attr("data-id", result[i].Value);
+                                }
+                                else {
+                                    $("#tempimage").attr("src", "../../assets/img/noimage.png");
+                                    $("#tempimage").attr("data-id", result[i].Value);
+                                }
+                            }
+                            else if (result[i].Key.match(/Color$/)) {
+                                $("#updateModalContainer input[name^='" + result[i].Key + "']").minicolors('value', result[i].Value);
+                            }
+                            else if (result[i].Key.match(/Date$/)) {
+
+                                var jsonDate = result[i].Value;
+                                var formattedDate = moment(jsonDate).utcOffset('+0300').format('DD-MM-YYYY HH:mm:ss');
+
+
+                                $("#updateModalContainer input[name^='" + result[i].Key + "']").val(formattedDate);
+                            }
+                            else if (result[i].Value === false || result[i].Value === true) {
+                                var val = +result[i].Value;
+
+                                $("#updateModalContainer select[name^='" + result[i].Key + "']").val(val).trigger('change');
+                            }
+                            else {
+                                if ($("#updateModalContainer input[name^='" + result[i].Key + "']").length > 0) {
+                                    var deger = "";
+                                    try {
+                                        deger = result[i].Value.toString();
+                                    }
+                                    catch (e) {
+                                        console.log(e);
+                                    }
+
+                                    if (result[i].Value == '[object Object]') {
+                                        $("#updateModalContainer input[name^='" + result[i].Key + "']").val(new Date('1/1/1990 ' + result[i].Value.Hours + ':' + result[i].Value.Minutes + ':' + result[i].Value.Seconds + ':' + result[i].Value.Milliseconds).toLocaleTimeString());
+                                    } else if (deger.startsWith("/Date")) {
+                                        var jsonDate = result[i].Value;
+                                        var formattedDate = moment(jsonDate).utcOffset('+0300').format('DD/MM/YYYY HH:mm:ss');
+
+                                        $("#updateModalContainer input[name^='" + result[i].Key + "']").val(formattedDate);
+                                    }
+                                    else {
+                                        $("#updateModalContainer input[name^='" + result[i].Key + "']").val(result[i].Value);
+                                    }
+                                }
+
+                                else {
+
+                                    if (i > 0) {
+                                        var valueid = $("#updateModalContainer select[name^='" + result[i].Key + "'] option").filter(function () { return $(this).html() == result[i].Value }).val();
+                                        $("#updateModalContainer select[name^='" + result[i].Key + "']").val(valueid).trigger('change');
+                                    }
+                                }
+                            }
+                        }
+                        var urlaction = '@Url.Action("Update","Define",new {text="test" })';
+                        var temp = tname + "_" + id;
+                        urlaction = urlaction.replace("test", temp);
+
+                        $("#defineForm").attr("action", urlaction);
+
+                        $("#defineForm > input[type=button]").replaceWith("<button type='button' class='btn btn-primary' id='updatebutton'>@Html.GetLang("Kaydet")</button>");
+
+                        sessionStorage.removeItem("unique");
+
+                        var arr = {};
+
+                        $("#updateModalContainer .unique").each(function () {
+                            var key = $(this).attr("name");
+                            var value = $(this).val();
+                            arr[key] = value;
+                            sessionStorage.setItem("unique", JSON.stringify(arr));
+                        });
+
+                        $('#updateModal').modal('show');
+                    }
+                })
+            }
+        });
+    }
+
+
+    function CalendarClick(calendar) {
+
+        $(calendar).addClass('datetimepicker');
+        var calendarName = $(calendar).attr("id");
+        $(calendar).css('z-index', '99');
+
+        $('.datetimepicker').each(function (i, picker) {
+            var datetimepickerName = $(picker).attr("id");
+            if (calendarName != datetimepickerName) {
+                $(picker).css('z-index', '1');
+                $(picker).removeClass('datetimepicker');
+            }
+        });
+    }
+
+    function selectall() {
+        if ($("#defineTbl >tbody>tr:not('.tr-selected')").length == 0) {
+            $("#defineTbl >tbody > tr").siblings().removeClass('tr-selected');
+            $("#defineTbl >tbody > tr .icheck").iCheck('uncheck');
+        }
+        else {
+            $("#defineTbl >tbody > tr").siblings().addClass('tr-selected');
+            $(".icheck").iCheck('check');
+        }
+    }
+
+    function Delete() {
+        var headers = {};
+        var token = $('input[name="__RequestVerificationToken"]').val();
+        headers['__RequestVerificationToken'] = token;
+        var arr = [];
+        if ($("#defineTbl >tbody > tr.tr-selected").length == 0) {
+            toastr.warning("Seçili satır bulunmamaktadır.");
+            return false;
+        }
+        else {
+            $("#defineTbl >tbody .tr-selected").each(function () {
+                arr.push($(this).find("td:eq(1)").text());
+            });
+
+            $.confirm({
+                typeAnimated: true,
+                type: 'red',
+                title: false,
+                content: '<i class="fa fa-exclamation-triangle" style="font-size:25px;  color:#e74c3c"></i><span style="padding-left:5px; font-weight:600;">Seçilen kayıtlar silinecek. Emin misiniz?</span>',
+                buttons: {
+                    tryAgain: {
+                        text: 'Tamam',
+                        btnClass: 'btn-success',
+                        action: function () {
+                            $.ajax({
+                                url: $("#urlnoid").val().replace("Action", "MultiDelete"),
+                                headers: headers,
+                                type: 'POST',
+                                data: { "Ids": arr, "TableName": '@Model.Name' },
+                                error: function (error) {
+                                    console.log("error  " + error);
+                                },
+                                success: function (result) {
+                                    if (result.Success == true) {
+                                        toastr.success("Kayıtlar Başarıyla Silindi");
+                                        RefreshTbody();
+                                    }
+                                    else {
+                                        toastr.error(result.Message, '@Html.GetLang("Hata")', { timeOut: 20000, closeButton: true });
+                                        toastr.info('@Html.GetLang("Buhataileilgiliçözümügörmekiçintıklayınız")', 'Help', {
+                                            closeButton: true, timeOut: 20000, onclick: function () {
+                                                window.location.href = result.Help;
+                                            }
+                                        });
+                                    }
+                                }
+                            });
+                        }
+                    },
+                    close: {
+                        text: 'İptal',
+                        btnClass: 'btn-danger',
+                    }
+                }
+            });
+        }
+    }
+
+
+    function EditSelected()
+    {
+        updateArr.length = 0;
+
+        if ($("#defineTbl >tbody > tr.tr-selected").length == 0) {
+            toastr.warning("Seçili satır bulunmamaktadır.");
+            return false;
+        }
+
+        else {
+            var url = "@Url.Action("GetRowForUpdate","Define")?tablename=" + '@Model.Name';
+            $.get(url, function (data) {
+
+                if (isNotEmpty(data.Success) && data.Success == false) {
+                        toastr.error(data.Message, '@Html.GetLang("Hata")', { timeOut: 20000, closeButton: true });
+                        return false;
+                }
+
+                $('#modalForNewUpdateContainer').html(data);
+                $("#defineForm input").prop("disabled", true);
+                $("#defineForm select").prop("disabled", true);
+                $("#hiddenimage").prop("disabled", false);
+
+                $("#defineForm .unique").each(function () {
+                    var name = $(this).attr("name").split('/')[0];
+                    $(this).css("display", "none");
+                    $("#defineForm label[for^='" + name + "']").css("display", "none");
+                });
+
+                $("#defineForm .unique").css("display", "none");
+                $("#defineForm input[type=checkbox]").prop("disabled", false);
+                $("#insert").replaceWith("<button type='button' class='btn btn-primary btn-update' id='toplu_update' onclick='javascript:UpdateSelected()'>@(Html.GetLang("Kaydet"))</button>");
+                $("#defineTbl >tbody > tr.tr-selected").each(function () {
+                    updateArr.push($(this).find("td:eq(1)").text());
+                });
+                $('#modalForNewUpdate').modal('show');
+            });
+        }
+    }
+
+
+    function UpdateSelected() {
+        if ($("#defineForm").serialize() == "Wrs_ImageID%2Fimage=") {
+            toastr.warning("Lütfen güncelleme alanı seçiniz.");
+            return false;
+        }
+        else {
+            var obj = { ids: updateArr, tbl: '@Model.Name' }
+            $.ajax({
+                url: $("#urlnoid").val().replace("Action", "MultiUpdate"),
+                data: $("#defineForm").serialize() + "&rest=" + JSON.stringify(obj),
+                type: 'POST',
+                error: function () {
+                    //console.log("error");
+                },
+                success: function (result) {
+                    if (result.Success == true) {
+                        toastr.success(result.Message);
+                        setTimeout(function () { location.reload(); }, 1500);
+                    }
+                    else {
+                        toastr.error(result.Message, '@Html.GetLang("Hata")', { timeOut: 20000, closeButton: true });
+                        toastr.info('@Html.GetLang("Buhataileilgiliçözümügörmekiçintıklayınız")', 'Help', {
+                            closeButton: true, timeOut: 20000, onclick: function () {
+                                window.location.href = result.Help;
+                            }
+                        });
+                      }
+                  }
+              })
+          }
+    }
+
+
+</script>
+

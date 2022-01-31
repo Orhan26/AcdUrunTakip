@@ -1,0 +1,96 @@
+﻿@using ACD_Urun_Takip.Models;
+@model List<HrkCompanyAuditInfo>
+@{
+    ViewBag.Title = "UpdateControlStatus";
+}
+<style>
+    .inputAck {
+        margin-top: -8px;
+        width: 100%;
+        border-style: dashed;
+        border-color: darkslateblue;
+        border-bottom-style: hidden;
+    }
+</style>
+<div class="modal fade" id="UpdateControlStatusModal" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content modalcontent">
+            <div class="modal-header modalheader-edit" >
+                <h4 class="modal-title modaltitle-left">Kontrol Düzenle</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body modalbody">
+                <div class="row">
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="labeltop">Şirket Adı</label>
+                                    <input id="companyId" class="form-control form-control-sm" value="@Model[0].SirketID.CompanyName" style="width:100%" disabled />
+                                </div>
+                            </div>
+                            <div class="col-md-12" style="margin-bottom: 8px;">
+                                <div class="form-group">
+                                    <label>Kontrol Grup Adı</label>
+                                    <input id="groupId" class="form-control form-control-sm" value="@Model[0].GrupID.GroupName" style="width:100%" disabled />
+                                </div>
+                            </div>
+                            @foreach (var sr in Model)
+                            {
+                                
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <div style="border-style:inset;border-color: #92a8d1;">
+                                            <label style="margin-left:5px">@sr.SoruID.Question</label>
+                                            @if (sr.Cevap == true)
+                                            {
+                                                <input @sr.SoruID.isDeleted id="@sr.DenetimID" type="checkbox" checked="checked" />
+                                   
+                                            }
+                                            else
+                                            {
+                                                <input @sr.SoruID.isDeleted id="@sr.DenetimID" type="checkbox" />
+                                            }
+                                            <br /><label style="margin-left:5px">Açıklama</label>
+                                            <br /><input @sr.SoruID.isDeleted id="@sr.DenetimID" class="form-control form-control-sm inputAck" type="text" value="@sr.Aciklama" />
+
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                </div>
+                    <div class="modal-footer" style="padding:.30rem">
+                        <button type="button" class="btn bg-gradient-danger btn-sm btn-danger-width" data-dismiss="modal">Kapat</button>
+                        <button type="button" class="btn bg-gradient-success btn-sm" id="btnAuditEdit">Kaydet</button>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+
+<script>
+    var model=@Html.Raw(Json.Encode(Model));
+    console.log("dur");
+    $(document).ready(function () {
+        $("#btnAuditEdit").click(function () {
+            for (var i = 0; i < model.length; i++) {
+                var denetimID = model[i].DenetimID;
+                model[i].Aciklama = $('input[type=text]').filter(function (i, inpt) { return $(inpt).attr('id') == denetimID }).val();
+                model[i].Cevap = $('input[type=checkbox]').filter(function (i, inpt) { return $(inpt).attr('id') == denetimID }).is(':checked');
+            }
+           $.ajax({
+                  url: '@Url.Action("UpdateControl","ControlStatus")',
+                  type: 'POST',
+               data: { updateControlStatus:model },
+               success: function (result) {
+                   toastr.success(result);
+                   $("#UpdateControlStatusModal").modal('hide');
+                   RefreshTable();
+                 },
+                     error: function (sonuc) {
+                        alert(sonuc)
+                    }
+              });
+        });
+    });
+</script>
+

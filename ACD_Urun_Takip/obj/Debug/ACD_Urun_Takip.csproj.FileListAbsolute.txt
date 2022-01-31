@@ -1,0 +1,281 @@
+E:\Acd_Urun_Takip\ACD_System\obj\Debug\ACD_Urun_Takip.csprojResolveAssemblyReference.cache
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\ACD_Urun_Takip.dll.config
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\ACD_Urun_Takip.dll
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\ACD_Urun_Takip.pdb
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\csc.exe
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\csc.exe.config
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\csc.rsp
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\csi.exe
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\csi.rsp
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\Microsoft.CodeAnalysis.dll
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\Microsoft.CSharp.Core.targets
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\Microsoft.VisualBasic.Core.targets
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\System.AppContext.dll
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\System.Collections.Immutable.dll
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\System.Diagnostics.StackTrace.dll
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\System.IO.FileSystem.dll
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\System.IO.FileSystem.Primitives.dll
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\System.Reflection.Metadata.dll
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\vbc.exe
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\vbc.exe.config
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\vbc.rsp
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\VBCSCompiler.exe
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\VBCSCompiler.exe.config
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\Antlr3.Runtime.dll
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\Microsoft.Web.Infrastructure.dll
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\Newtonsoft.Json.dll
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.ValueTuple.dll
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.Web.Helpers.dll
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.Web.Mvc.dll
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.Web.Optimization.dll
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.Web.Razor.dll
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.Web.WebPages.Deployment.dll
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.Web.WebPages.dll
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.Web.WebPages.Razor.dll
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\WebGrease.dll
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.ValueTuple.xml
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.Web.Helpers.xml
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.Web.Mvc.xml
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.Web.Optimization.xml
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.Web.Razor.xml
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.Web.WebPages.xml
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.Web.WebPages.Deployment.xml
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.Web.WebPages.Razor.xml
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\Newtonsoft.Json.xml
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\Antlr3.Runtime.pdb
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+E:\Acd_Urun_Takip\ACD_Urun_Takip\obj\Debug\ACD_Urun_Takip.csprojAssemblyReference.cache
+E:\Acd_Urun_Takip\ACD_Urun_Takip\obj\Debug\ACD_Urun_Takip.csproj.CoreCompileInputs.cache
+E:\Acd_Urun_Takip\ACD_Urun_Takip\obj\Debug\ACD_Urun_Takip.csproj.CopyComplete
+E:\Acd_Urun_Takip\ACD_Urun_Takip\obj\Debug\ACD_Urun_Takip.dll
+E:\Acd_Urun_Takip\ACD_Urun_Takip\obj\Debug\ACD_Urun_Takip.pdb
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\GleamTech.Common.dll
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\GleamTech.Common.xml
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\Syncfusion.Compression.Base.dll
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\Syncfusion.DocIO.Base.dll
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\Syncfusion.Licensing.dll
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\Syncfusion.OfficeChart.Base.dll
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\Syncfusion.Pdf.Base.dll
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\Syncfusion.Compression.Base.xml
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\Syncfusion.DocIO.Base.xml
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\Syncfusion.Licensing.xml
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\Syncfusion.OfficeChart.Base.xml
+E:\Acd_Urun_Takip\ACD_Urun_Takip\bin\Syncfusion.Pdf.Base.xml
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\ACD_Urun_Takip.dll.config
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\ACD_Urun_Takip.dll
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\ACD_Urun_Takip.pdb
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\csc.exe
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\csc.exe.config
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\csc.rsp
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\csi.exe
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\csi.rsp
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\System.AppContext.dll
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\vbc.exe
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\vbc.exe.config
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\vbc.rsp
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\VBCSCompiler.exe
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\Antlr3.Runtime.dll
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\GleamTech.Common.dll
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\Newtonsoft.Json.dll
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\Syncfusion.Compression.Base.dll
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\Syncfusion.DocIO.Base.dll
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\Syncfusion.Licensing.dll
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\Syncfusion.OfficeChart.Base.dll
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\Syncfusion.Pdf.Base.dll
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.ValueTuple.dll
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.Web.Helpers.dll
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.Web.Mvc.dll
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.Web.Optimization.dll
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.Web.Razor.dll
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.Web.WebPages.dll
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.Web.WebPages.Razor.dll
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\WebGrease.dll
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\GleamTech.Common.xml
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\Syncfusion.Compression.Base.xml
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\Syncfusion.DocIO.Base.xml
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\Syncfusion.Licensing.xml
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\Syncfusion.OfficeChart.Base.xml
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\Syncfusion.Pdf.Base.xml
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.ValueTuple.xml
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.Web.Helpers.xml
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.Web.Mvc.xml
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.Web.Optimization.xml
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.Web.Razor.xml
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.Web.WebPages.xml
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.Web.WebPages.Razor.xml
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\Newtonsoft.Json.xml
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\Antlr3.Runtime.pdb
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\obj\Debug\ACD_Urun_Takip.csprojAssemblyReference.cache
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\obj\Debug\ACD_Urun_Takip.csproj.CoreCompileInputs.cache
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\obj\Debug\ACD_Urun_Takip.csproj.CopyComplete
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\obj\Debug\ACD_Urun_Takip.dll
+C:\Users\Orhan\Desktop\ACD YEDEK\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\obj\Debug\ACD_Urun_Takip.pdb
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\ACD_Urun_Takip.dll.config
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\ACD_Urun_Takip.dll
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\ACD_Urun_Takip.pdb
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\csc.exe
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\csc.exe.config
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\csc.rsp
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\csi.exe
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\csi.rsp
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\System.AppContext.dll
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\vbc.exe
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\vbc.exe.config
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\vbc.rsp
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\VBCSCompiler.exe
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\Antlr3.Runtime.dll
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\GleamTech.Common.dll
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\Newtonsoft.Json.dll
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\Syncfusion.Compression.Base.dll
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\Syncfusion.DocIO.Base.dll
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\Syncfusion.Licensing.dll
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\Syncfusion.OfficeChart.Base.dll
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\Syncfusion.Pdf.Base.dll
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.ValueTuple.dll
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.Web.Helpers.dll
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.Web.Mvc.dll
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.Web.Optimization.dll
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.Web.Razor.dll
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.Web.WebPages.dll
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.Web.WebPages.Razor.dll
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\WebGrease.dll
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\GleamTech.Common.xml
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\Syncfusion.Compression.Base.xml
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\Syncfusion.DocIO.Base.xml
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\Syncfusion.Licensing.xml
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\Syncfusion.OfficeChart.Base.xml
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\Syncfusion.Pdf.Base.xml
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.ValueTuple.xml
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.Web.Helpers.xml
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.Web.Mvc.xml
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.Web.Optimization.xml
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.Web.Razor.xml
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.Web.WebPages.xml
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.Web.WebPages.Razor.xml
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\Newtonsoft.Json.xml
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\Antlr3.Runtime.pdb
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\obj\Debug\ACD_Urun_Takip.csproj.AssemblyReference.cache
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\obj\Debug\ACD_Urun_Takip.csproj.CoreCompileInputs.cache
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\obj\Debug\ACD_Urun_Takip.csproj.CopyComplete
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\obj\Debug\ACD_Urun_Takip.dll
+C:\Users\Dell\Downloads\ACD09.08.21\ACD09.08.21\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\obj\Debug\ACD_Urun_Takip.pdb
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\ACD_Urun_Takip.dll.config
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\ACD_Urun_Takip.dll
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\ACD_Urun_Takip.pdb
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\csc.exe
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\csc.exe.config
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\csc.rsp
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\csi.exe
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\csi.rsp
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\System.AppContext.dll
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\System.Collections.Immutable.dll
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\System.IO.FileSystem.dll
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\System.Reflection.Metadata.dll
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\vbc.exe
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\vbc.exe.config
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\vbc.rsp
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\VBCSCompiler.exe
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\roslyn\VBCSCompiler.exe.config
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\Antlr3.Runtime.dll
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\GleamTech.Common.dll
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\Microsoft.Web.Infrastructure.dll
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\Newtonsoft.Json.dll
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\Syncfusion.Compression.Base.dll
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\Syncfusion.DocIO.Base.dll
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\Syncfusion.Licensing.dll
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\Syncfusion.OfficeChart.Base.dll
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\Syncfusion.Pdf.Base.dll
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.ValueTuple.dll
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.Web.Helpers.dll
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.Web.Mvc.dll
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.Web.Optimization.dll
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.Web.Razor.dll
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.Web.WebPages.Deployment.dll
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.Web.WebPages.dll
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.Web.WebPages.Razor.dll
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\WebGrease.dll
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\GleamTech.Common.xml
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\Syncfusion.Compression.Base.xml
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\Syncfusion.DocIO.Base.xml
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\Syncfusion.Licensing.xml
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\Syncfusion.OfficeChart.Base.xml
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\Syncfusion.Pdf.Base.xml
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.ValueTuple.xml
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.Web.Helpers.xml
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.Web.Mvc.xml
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.Web.Optimization.xml
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.Web.Razor.xml
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.Web.WebPages.xml
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.Web.WebPages.Deployment.xml
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\System.Web.WebPages.Razor.xml
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\Newtonsoft.Json.xml
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\Antlr3.Runtime.pdb
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\obj\Debug\ACD_Urun_Takip.csprojAssemblyReference.cache
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\obj\Debug\ACD_Urun_Takip.csproj.CoreCompileInputs.cache
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\obj\Debug\ACD_Urun_Takip.csproj.CopyComplete
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\obj\Debug\ACD_Urun_Takip.dll
+C:\Visual Studio project\Acd_Urun_Takip\Acd_Urun_Takip\ACD_Urun_Takip\obj\Debug\ACD_Urun_Takip.pdb

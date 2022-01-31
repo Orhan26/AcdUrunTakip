@@ -1,0 +1,290 @@
+﻿@model ACD_Urun_Takip.Models.ProfileModel
+@using ACD_Urun_Takip.Extensions
+@using ACD_Urun_Takip.Models
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- InputMask -->
+<script src="~/assets/plugins/moment/moment.min.js"></script>
+<script src="~/assets/plugins/inputmask/jquery.inputmask.min.js"></script>
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="card card-primary card-outline mt-3">
+            <div class="card-header">
+                <h3 class="card-title">
+                    <i class="fas fa-edit"></i>
+                    Kullanıcı Profili
+                </h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-5 col-sm-3">
+                        <div class="nav flex-column nav-tabs h-100" id="vert-tabs-tab" role="tablist" aria-orientation="vertical">
+                            <a class="nav-link active" id="vert-tabs-profile-tab" data-toggle="pill" href="#vert-tabs-profile" role="tab" aria-controls="vert-tabs-profile" aria-selected="true">Hesap Ayarları</a>
+                            <a class="nav-link" id="vert-tabs-messages-tab" data-toggle="pill" href="#vert-tabs-messages" role="tab" aria-controls="vert-tabs-messages" aria-selected="false">Messages</a>
+                            <a class="nav-link" id="vert-tabs-settings-tab" data-toggle="pill" href="#vert-tabs-settings" role="tab" aria-controls="vert-tabs-settings" aria-selected="false">Settings</a>
+                        </div>
+                    </div>
+                    <div class="col-7 col-sm-9">
+                        <div class="tab-content" id="vert-tabs-tabContent">
+                            <div class="tab-pane text-left fade show active" id="vert-tabs-profile" role="tabpanel" aria-labelledby="vert-tabs-profile-tab">
+                                <ul class="nav nav-tabs" id="custom-content-above-tab" role="tablist" style="float:right;">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="custom-content-above-home-tab" data-toggle="pill" href="#custom-content-above-home" role="tab" aria-controls="custom-content-above-home" aria-selected="true">Kişisel Bilgiler</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="custom-content-above-profile-tab" data-toggle="pill" href="#custom-content-above-profile" role="tab" aria-controls="custom-content-above-profile" aria-selected="false">Şifre Değiştir</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content" id="custom-content-above-tabContent" style="padding-top:60px;">
+                                    <div class="tab-pane fade show active" id="custom-content-above-home" role="tabpanel" aria-labelledby="custom-content-above-home-tab">
+                                        <form class="form-horizontal" id="userForm">
+                                            <div class="form-group row">
+                                                <label for="name" class="col-sm-2 col-form-label">@Html.GetLang("Ad Soyad")</label>
+                                                <div class="col-sm-10">
+                                                    <input type="email" class="form-control input-user" old-value="@Model.Name" value="@Model.Name" id="name" placeholder="@Html.GetLang("Ad Soyad")">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="mail" class="col-sm-2 col-form-label">Email</label>
+                                                <div class="col-sm-10">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                                        </div>
+                                                        <input type="email" class="form-control  input-user" old-value="@Model.Mail" value="@Model.Mail" id="mail" placeholder="Email">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="phone" class="col-sm-2 col-form-label">@Html.GetLang("Telefon")</label>
+                                                <div class="col-sm-10">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                                        </div>
+                                                        <input type="text" class="form-control  input-user" old-value="@Model.Phone" value="@Model.Phone" id="phone" data-inputmask='"mask": "(999) 999-9999"' data-mask>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="inputExperience" class="col-sm-2 col-form-label">@Html.GetLang("Kullanıcı Adı")</label>
+                                                <div class="col-sm-10">
+                                                    <input class="form-control" placeholder="Design, Web etc." readonly value="@Model.Code" />
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <div class="offset-sm-2 col-sm-10">
+                                                    <button type="button" id="updateUserBtn" class="btn btn-success pull-right">@Html.GetLang("Kaydet")</button>
+                                                    <button type="button" id="cancelUserBtn" class="btn btn-danger pull-right mr-3">@Html.GetLang("İptal")</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="tab-pane fade" id="custom-content-above-profile" role="tabpanel" aria-labelledby="custom-content-above-profile-tab">
+                                        <form class="form-horizontal" id="passwordForm">
+                                            <div class="form-group row">
+                                                <label for="oldpass" class="col-sm-2 col-form-label">@Html.GetLang("Mevcut Şifre")</label>
+                                                <div class="col-sm-10 input-group">
+                                                    <input type="password" class="form-control input-pass" placeholder="Password" id="oldpass" />
+                                                    <div class="input-group-append">
+                                                        <div class="input-group-text">
+                                                            <span class="fas fa-lock"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="newpass" class="col-sm-2 col-form-label">@Html.GetLang("Yeni Şifre")</label>
+                                                <div class="col-sm-10 input-group">
+                                                    <input type="password" class="form-control input-pass" placeholder="Password" id="newpass" />
+                                                    <div class="input-group-append">
+                                                        <div class="input-group-text">
+                                                            <span class="fas fa-lock"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="newpass2" class="col-sm-2 col-form-label">@Html.GetLang("Yeni Şifre Tekrar")</label>
+                                                <div class="col-sm-10 input-group">
+                                                    <input type="password" class="form-control input-pass" placeholder="Password" id="newpass2" />
+                                                    <div class="input-group-append">
+                                                        <div class="input-group-text">
+                                                            <span class="fas fa-lock"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <div class="offset-sm-2 col-sm-10">
+                                                    <button type="button" id="updatePasswordBtn" class="btn btn-success pull-right">@Html.GetLang("Şifre Değiştir")</button>
+                                                    <button type="button" id="cancelPasswordBtn" class="btn btn-danger pull-right mr-3">@Html.GetLang("İptal")</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="vert-tabs-messages" role="tabpanel" aria-labelledby="vert-tabs-messages-tab">
+                                //
+                            </div>
+                            <div class="tab-pane fade" id="vert-tabs-settings" role="tabpanel" aria-labelledby="vert-tabs-settings-tab">
+
+                                //
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.card -->
+        </div>
+    </div>
+</section>
+<script>
+    $('[data-mask]').inputmask()
+
+    $(document).on("click", "#cancelUserBtn", function () {
+        $("#userForm .input-user").each(function (index) {
+            $(this).val($(this).attr("old-value"));
+        });
+    });
+    $(document).on("click", "#cancelPasswordBtn", function () {
+        $("#passwordForm .input-pass").each(function (index) {
+            $(this).val("");
+        });
+    });
+
+    $(document).on("click", "#updateUserBtn", function () {
+        if ($("#name").val() == "") {
+            toastr.warning("Lütfen Ad Soyad Giriniz");
+            return false;
+        }
+        if ($("#mail").val() == "") {
+            toastr.warning("Lütfen Mail Giriniz");
+            return false;
+        }
+        if ($("#phone").val() == "") {
+            toastr.warning("Lütfen Telefon Giriniz");
+            return false;
+        }
+        if (!isValidPhone($("#phone").val())) {
+
+            toastr.warning("Girilen Telefon Uygun Değildir.");
+            return false;
+        }
+        if (!isValidEmail($("#mail").val())) {
+            toastr.warning("Girilen Mail Uygun Değildir.");
+            return false;
+        }
+        var token = $('input[name="__RequestVerificationToken"]').val();
+        var headers = {};
+        headers['__RequestVerificationToken'] = token;
+        var info = {
+            "name": $("#name").val(),
+            "mail": $("#mail").val(),
+            "number": $("#phone").val(),
+            "mod": "UPDATE",
+            "userid": '@Html.EncryptData(Html.ViewContext.HttpContext.User.Identity.Name.Split('_')[1]).ToString()',
+            "sproc": '@Html.EncryptData("SysUserProfileSettings")'
+        }
+        $.ajax({
+            url: '@Url.Action("ReturnMessage","Home")',
+            type: 'POST',
+            headers: headers,
+            data: info,
+            error: function () {
+                console.log("error");
+            },
+            success: function (result) {
+                if (result.Success == true) {
+                    toastr.success(result.Message);
+                    setTimeout(function () {
+                        location.reload();
+                    }, 1000)
+                }
+                else {
+                    toastr.error(result.Message, '@Html.GetLang("Hata")', { timeOut: 20000, closeButton: true });
+                    toastr.info('@Html.GetLang("Buhataileilgiliçözümügörmekiçintıklayınız")', 'Help', {
+                        closeButton: true, timeOut: 20000, onclick: function () {
+                            window.location.href = result.Help;
+                        }
+                    });
+                    return false;
+                }
+            }
+        })
+    });
+
+    $(document).on("click", "#updatePasswordBtn", function () {
+        if ($("#oldpass").val() == "") {
+            toastr.warning("Lütfen Güncel Şifrenizi Giriniz");
+            return false;
+        }
+        if ($("#newpass").val() == "") {
+            toastr.warning("Yeni Şifre Giriniz.");
+            return false;
+        }
+        if ($("#newpass2").val() == "") {
+            toastr.warning("Yeni Şifreyi Tekrar Giriniz.");
+            return false;
+        }
+        if ($("#newpass").val() != $("#newpass2").val()) {
+            toastr.warning("Girilen Şifreler Eşleşmiyor.");
+            return false;
+        }
+        var info = {
+            "OldPass": $("#oldpass").val(),
+            "NewPass": $("#newpass").val(),
+            "userid": '@Html.EncryptData(Html.ViewContext.HttpContext.User.Identity.Name.Split('_')[1]).ToString()',
+            "sproc": '@Html.EncryptData("SysUserProfileSettings")',
+            "mod": "CHANGEPASS"
+        }
+        var token = $('input[name="__RequestVerificationToken"]').val();
+        var headers = {};
+        headers['__RequestVerificationToken'] = token;
+        $.ajax({
+            url: '@Url.Action("ReturnMessage","Home")',
+            type: 'POST',
+            headers: headers,
+            data: info,
+            error: function () {
+                console.log("error");
+            },
+            success: function (result) {
+                if (result.Success == true) {
+                    if (result.Message.indexOf('!') > 0) {
+                        toastr.error(result.Message);
+                        return false;
+                    }
+                    else {
+                        toastr.success(result.Message);
+                        setTimeout(function () {
+                            location.reload();
+                        }, 1000)
+                    }
+
+                }
+                else {
+                    toastr.error(result.Message, '@Html.GetLang("Hata")', { timeOut: 20000, closeButton: true });
+                    toastr.info('@Html.GetLang("Buhataileilgiliçözümügörmekiçintıklayınız")', 'Help', {
+                        closeButton: true, timeOut: 20000, onclick: function () {
+                            window.location.href = result.Help;
+                        }
+                    });
+                    return false;
+                }
+            }
+
+        });
+    });
+</script>

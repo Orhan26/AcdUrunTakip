@@ -1,0 +1,381 @@
+﻿@using ACD_Urun_Takip.Extensions
+@model System.Data.DataTable
+@using System.Data
+@using ACD_Urun_Takip.Models
+@{
+    ViewBag.Title = "UserMenu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- DataTables -->
+<link rel="stylesheet" href="~/assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="~/assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+<link rel="stylesheet" href="~/assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+
+<script src="~/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="~/assets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="~/assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="~/assets/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="~/assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="~/assets/plugins/jszip/jszip.min.js"></script>
+<script src="~/assets/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="~/assets/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="~/assets/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="~/assets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="~/assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
+<!--Confirm-->
+<link href="~/assets/plugins/jquery-confirm/css/jquery-confirm.css" rel="stylesheet" />
+<script src="~/assets/plugins/jquery-confirm/js/jquery-confirm.js"></script>
+
+<style>
+
+    /*.div-menu {
+        width: 50%;
+    }*/
+
+    a.links.menu-link {
+        text-shadow: none;
+        color: #444444;
+    }
+
+    .icheckbox_square-blue {
+        float: right;
+    }
+
+    .menu-header {
+        margin-left: -6px;
+        margin-right: 30px;
+        float: right;
+        text-transform: uppercase;
+        font-weight: 600;
+    }
+
+    .div-menu div[class*='icheckbox_'] {
+        margin-right: 50px;
+        margin-bottom: 1px;
+    }
+
+    .li-user {
+        list-style: none;
+        padding-top: 5px;
+        padding-bottom: 6px;
+        margin-bottom: 7px; /* 3px margin plus 1px for the border */
+        position: relative;
+    }
+
+        .li-user + .li-user:before { /* this is a pseudo element to create the border */
+            content: '';
+            display: block;
+            height: 1px;
+            background: #eff0f1;
+            position: absolute;
+            top: -4px;
+            left: 0;
+            right: 0;
+        }
+</style>
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <ol class="breadcrumb">
+                    <li class="hidden-xs breadcrumb-item">
+                        <a href="@Url.Action("Index","Home")">@Html.GetLang("AnaSayfa")</a>
+                    </li>
+
+                    <li class="hidden-xs breadcrumb-item">
+                        <a href="#">@Html.GetLang("Menu")</a>
+                    </li>
+                    <li class="breadcrumb-item active">
+                        <a href="#" id="export_title">Menu-Profil</a>
+                    </li>
+                </ol>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item">
+                        <div class="btn-group btn-action">
+                            <button type="button" class="btn btn-outline-primary dropdown-toggle btn-sub-action" data-toggle="dropdown">
+                                <i class="fa fas fa-ellipsis-v"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                <a class="dropdown-item" href="javascript:CreateUserGroup()"><i class="fas fa-plus action-icon"></i>Yeni Kullanıcı Grubu</a>
+                            </div>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content content-define">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header" style="background-color:#ddd;">
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-8 col-md-10 col-sm-12">
+                                <div class="tabbable-line">
+                                    <ul class="nav nav-tabs">
+                                        @{int i = 0;}
+                                        @foreach (DataRow item in Model.Rows)
+                                        {
+                                            <li class="nav-item">
+                                                <a href="#tab_@item["UsG_ID"]" data-toggle="tab" class="@(i==0?"active nav-link":"nav-link")">
+                                                    @item["UsG_Name"]
+                                                </a>
+                                            </li>
+                                            i++;
+                                        }
+                                    </ul>
+                                    <div class="tab-content">
+                                        @{ int b = 0; }
+                                        @foreach (DataRow item in Model.Rows)
+                                        {
+                                            <div class="tab-pane fade @(b==0?"active show":"")" id="tab_@item["Usg_ID"]">
+                                            </div>
+                                            b++;
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="modal fade" id="createUserGroupModal" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="border-radius:24px;">
+            <div class="modal-header" style="background-color: #337ab7;border-top-right-radius: 23px;border-top-left-radius: 23px;color: white;">
+                <h4 class="modal-title">Yeni Kullanıcı Grubu</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="yenisutunadi">@Html.GetLang("UsG_Name")</label>
+                            <input type="text" class="form-control" id="usg_name" placeholder="@Html.GetLang("UsG_Name")..." />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn bg-gradient-danger btn-sm" data-dismiss="modal">Kapat</button>
+                <button type="button" class="btn bg-gradient-success btn-sm" id="createUserGroupBtn">Kaydet</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function GetMenu(groupid, id) {
+        $.ajax({
+            url: '@Url.Action("MenuGroups")',
+            type: 'POST',
+            data: { "groupid": groupid },
+            error: function () {
+            },
+            success: function (result) {
+                $("" + id).html(result);
+                $("" + id).find('input[type="checkbox"]').iCheck({ checkboxClass: 'icheckbox_square-blue' });
+            },
+            complete: function (data) {
+                ControlCheckPermission();
+            }
+
+        })
+    }
+
+    $(document).ready(function () {
+        var id = $(".nav.nav-tabs").find("li a.active").attr("href");
+        var group = id.split('_')[1];
+        GetMenu(group, id);
+    });
+
+    $(document).on("click", ".nav.nav-tabs>li", function () {
+        var id = $(this).find("a").attr("href");
+        var group = id.split('_')[1];
+        GetMenu(group, id);
+    });
+
+    function CreateUserGroup () {
+        $("#createUserGroupModal").modal("show");
+    }
+
+
+    $(document).on("click", "#createUserGroupBtn", function () {
+        if ($("#usg_name").val() == "") {
+            toastr.warning("Lütfen Grup Adı Giriniz!");
+        }
+        else {
+            $.ajax({
+                url:'@Url.Action("CreateUserGroup","User")',
+                type: 'POST',
+                data: { "usgname": $("#usg_name").val() },
+                error: function () { },
+                success: function (result) {
+                    if (result.Success) {
+                        toastr.success(result.Message);
+                        setTimeout(function () {
+                            location.reload();
+
+                        },1500)
+                    }
+                    else {
+                        toastr.error(result.Message);
+                        return false;
+                    }
+                }
+            })
+        }
+    })
+</script>
+<script>
+    $(document).on("click", ".links", function () {
+        if ($(this).parent().children('ul:first').hasClass('collapse') == false) {
+            $(this).parent().children('ul:first').addClass('collapse')
+        }
+        else {//tik kalktı
+            $(this).parent().children('ul:first').removeClass('collapse')
+        }
+    });
+
+</script>
+<script>
+
+    function ControlCheckPermission() {
+        $(".tab-pane.active .check-@MenuPermission.Read").each(function () {
+            var $id = $(this).attr("ch-id");
+
+            if ($(this).prop('checked')) {
+                $(".tab-pane.active .check-@(MenuPermission.Read)[ch-id=" + $id + "]").closest("li").find(".icheck[ch-id=" + $id + "]").not($(".check-@(MenuPermission.Read)[ch-id=" + $id + "]")).attr("disabled", false).iCheck("update");
+            }
+            else {
+                $(".tab-pane.active .check-@(MenuPermission.Read)[ch-id=" + $id + "]").closest("li").find(".icheck[ch-id=" + $id + "]").not($(".check-@(MenuPermission.Read)[ch-id=" + $id + "]")).attr("disabled", true).iCheck("update");
+            }
+
+        });
+    }
+
+
+
+    $(document).on("ifClicked", ".check-@MenuPermission.Create, .check-@MenuPermission.Update, .check-@MenuPermission.Delete,.check-@MenuPermission.Read", function () {
+        var $this = $(this);
+        var $id = $($this).closest("li").attr("data-id");
+        var classArr = $(this).attr("class").split(" ");
+        var $class;
+        var IsChecked = $($this).prop('checked');
+
+
+        for (var i = 0; i < classArr.length; i++) {
+            if (classArr[i].indexOf("check-" > 0))
+                $class = classArr[i];
+        }
+
+        ControlParent($id, $class, IsChecked);
+
+    });
+
+    function UpdateMenuGroup($id) {
+        var group = $(".nav.nav-tabs").find("li a.active").attr("href").split('_')[1];
+        var isRead =   $(".tab-pane.active .check-@(MenuPermission.Read)[ch-id=" + $id + "]").prop("checked");
+        var isCreate = $(".tab-pane.active .check-@(MenuPermission.Create)[ch-id=" + $id + "]").prop("checked");
+        var isUpdate = $(".tab-pane.active .check-@(MenuPermission.Update)[ch-id=" + $id + "]").prop("checked");
+        var isDelete = $(".tab-pane.active .check-@(MenuPermission.Delete)[ch-id=" + $id + "]").prop("checked");
+        var model = { IsRead: isRead, IsCreate: isCreate, IsUpdate: isUpdate, IsDelete: isDelete, MenuId: $id, UserGroupId: group, IsReport: false };
+        $.ajax({
+            url: '@Url.Action("UpdateMenuGroup","User")',
+            type: 'POST',
+            data: model,
+            error: function () {
+            },
+            success: function (result) {
+                if (result.Success && result.Code == 1) {
+                    toastr.success(result.Message);
+                }
+                else if (!result.Success) {
+                    toastr.error(result.Message);
+                }
+            }
+        });
+    }
+
+    function ControlParent($id, $class, IsChecked) {
+        var IsControl = true;
+        var parentId = $(".tab-pane.active li[data-id=" + $id + "]").closest("ul").attr("parent-id");
+        var hasChild = $(".tab-pane.active li[data-id=" + $id + "]").find("ul").length > 0 ? true : false;
+
+        if (isEmpty(parentId)) {
+            parentId = $id;
+            IsControl = false;
+            hasChild: true;
+        }
+        var checkArr = [];
+        var unCheckArr = [];
+        if (isNotEmpty(parentId)) {
+            if (!IsChecked) {
+                //check does not add when not written
+                $(".tab-pane.active "+"." + $class + "[ch-id=" + $id + "]").not(':disabled').iCheck('check');
+                if (hasChild) {
+                    if ($(".tab-pane.active ul[parent-id=" + $id + "]").find("." + $class + ":not(:checked)").not(":disabled").length == $(".tab-pane.active ul[parent-id=" + $id + "]").find("." + $class).not(":disabled").length) {
+                        $(".tab-pane.active ul[parent-id=" + $id + "]").find("." + $class + ":not(:disabled)").not(':checked').iCheck('check');
+                        $(".tab-pane.active ul[parent-id=" + $id + "]").find("." + $class + ":not(:disabled):checked").each(function () {
+                            var id = $(this).attr("ch-id");
+                            UpdateMenuGroup(id);
+                        });
+                    }
+
+                    if ($(".tab-pane.active "+"." + $class + "[ch-id=" + parentId + "]").prop("checked"))
+                        IsControl = false;
+                }
+
+            }
+            else {
+                //check does not take off when not written
+                $(".tab-pane.active li[data-id=" + $id + "]").find("." + $class + ":checked").not(':disabled').iCheck('uncheck');
+
+                var parentCheckCount = isEmpty($(".tab-pane.active ul[parent-id=" + parentId + "]").find("." + $class + ":checked").length) ? 0 : $(".tab-pane.active ul[parent-id=" + parentId + "]").find("." + $class + ":checked").length;
+
+                if (!hasChild) {
+                    if (parentCheckCount < 1) {
+                        $(".tab-pane.active "+"." + $class + "[ch-id=" + parentId + "]:not(:disabled)").iCheck('uncheck');
+                        UpdateMenuGroup(parentId);
+                    }
+                    else
+                        IsControl = false;
+
+                }
+                else {
+
+                    $(".tab-pane.active ul[parent-id=" + $id + "]").find("." + $class + ":checked").not(':disabled').iCheck('uncheck');
+                    $(".tab-pane.active ul[parent-id=" + $id + "]").find("." + $class + ":not(:checked)").not(':disabled').each(function () {
+                        var id = $(this).attr("ch-id");
+                        UpdateMenuGroup(id);
+                    });
+
+                    if ($(".tab-pane.active li[data-id=" + parentId + "]:first").find("." + $class + ":checked").not(":disabled").length > 1)
+                        IsControl = false;
+                }
+
+            }
+            if (IsControl)
+                ControlParent(parentId, $class, IsChecked);
+            UpdateMenuGroup($id);
+        }
+        ControlCheckPermission();
+    }
+
+</script>

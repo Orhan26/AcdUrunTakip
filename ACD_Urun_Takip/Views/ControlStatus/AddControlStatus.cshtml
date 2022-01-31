@@ -1,0 +1,111 @@
+﻿@using ACD_Urun_Takip.Models;
+@model List<CompanyGroupInfo>
+@{
+    ViewBag.Title = "AddControlStatus";
+}
+
+<link href="~/assets/css/productTracking.css" rel="stylesheet" />
+<link href="~/assets/plugins/boostrap-select/bootstrap-select.css" rel="stylesheet" />
+<script src="~/assets/plugins/boostrap-select/bootstrap-select.js"></script>
+
+<div class="modal fade" id="createControlStatusModal" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="border-radius:24px;">
+            <div class="modal-header modalheader-edit">
+                <h4 class="modal-title modaltitle-left">Yeni Kontrol</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body" style="margin-bottom:-21px;margin-top:-23px;">
+                <div class="row">
+                    <div class="col-md-12" style="height:152px">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="labeltop">Şirket Adı</label>
+                                        <select id="companyId" class="selectpicker show-tick show-menu-arrow " onclick="SelectGroup(this.value)">
+                                            <option value="01">Seçiniz</option>
+                                            @foreach (var grpKn in Model.GroupBy(o => o.CompanyID.CompanyName).ToList())
+                                            {
+                                                <option value="@grpKn.FirstOrDefault().CompanyID.CompanyId">@grpKn.FirstOrDefault().CompanyID.CompanyName</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top:-14px;">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="labeltop">Kontrol Grup Adı</label>
+                                        <select id="selectGroup" multiple="multiple"></select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer" style="padding:.30rem">
+                    <button type="button" class="btn bg-gradient-danger btn-sm btn-danger-width" data-dismiss="modal">Kapat</button>
+                    <button type="button" class="btn bg-gradient-success btn-sm" id="btnStartAudit">Kaydet</button>
+                </div>
+            </div>
+        </div>
+      </div>
+  </div>
+<script>
+    var model =@Html.Raw(Json.Encode(Model));
+    $("#selectGroup").select2();
+    $("#companyId").selectpicker();
+    function SelectGroup(companyId) {
+        $("#selectGroup option").remove();
+        for (var i = 0; i < model.length; i++) {
+            if (companyId == model[i].CompanyID.CompanyId) {
+                $('#selectGroup').append($('<option>', {
+                    value: model[i].GroupID.GroupID,
+                    text: model[i].GroupID.GroupName
+                }));
+            }
+        }
+    }
+    $(document).ready(function () {
+        $("#btnStartAudit").click(function () {
+            var GroupArray = new Array();
+            var companyId = $("#companyId").val();
+            GroupArray = $("#selectGroup").val();
+            if (companyId == 01) {
+                toastr.error("Şirket Adı boş bırakılamaz!");
+                $("#companyId").parent().addClass('RedBorder');
+                borderTime($("#companyId").parent());  
+            }
+            else if (GroupArray.length == 0) {
+                toastr.error("Kontrol Grup Adı boş bırakılamaz!");
+                $(".form-group").children('span').addClass('RedBorder');
+                borderTime($(".form-group").children('span'));
+            }
+            else {
+                $.ajax({
+                    url: '@Url.Action("AddAuditRecord", "ControlStatus")',
+                    type: 'POST',
+                    data: { Groupid: GroupArray, Companyid: companyId, Controlid: 1 },
+                    success: function (result) {
+                        toastr.options = {
+                            "timeOut": "1000",
+                        };
+                        if (result == "Bu kayıt daha önce eklendi") {
+                            toastr.error("Bu kayıt daha önce eklendi!");
+                        }
+                        else {
+                            toastr.success(result);
+                            $("#createControlStatusModal").modal('hide');
+                            RefreshTable();
+                        }
+                    },
+                    error: function (result) {
+                        alert(result);
+                    }
+                });
+            }
+        });
+    });
+</script>
+

@@ -1,0 +1,105 @@
+﻿@using ACD_Urun_Takip.Models;
+@model ListInformation
+@{
+    ViewBag.Title = "DeleteRecordView";
+}
+<link href="~/assets/plugins/select2/css/select2.min.css" rel="stylesheet" />
+<script src="~/assets/plugins/select2/js/select2.full.min.js"></script>
+<link href="~/assets/plugins/boostrap-select/bootstrap-select.css" rel="stylesheet" />
+<script src="~/assets/plugins/boostrap-select/bootstrap-select.js"></script>
+
+<div class="modal fade" id="DeleteRecordModal" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content modalcontent">
+            <div class="modal-header modalheader-edit">
+                <h4 class="modal-title modaltitle-left">Denetim Kaydı Sil</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body" style="margin-top: -14px;margin-bottom: -10px;">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Şirket Adı</label><br />
+                            <select id="companyId" onchange="SelectGroup(this.value)" class="selectpicker show-menu-arrow show-tick">
+                                <option value="01">Seçiniz</option>
+                                @foreach (var srk in Model.Companies)
+                                {
+                                    <option value="@srk.CompanyId">@srk.CompanyName</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Kontrol Grup Adı</label>
+                            <select id="selectGroup" style="width:100%" multiple="multiple"></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer" style="padding: 0.3rem;height:39px;">
+                    <button type="button" class="btn bg-gradient-danger btn-sm btn-danger-width" data-dismiss="modal">Kapat</button>
+                    <button type="button" class="btn bg-gradient-success btn-sm" id="btnRecordDelete">Kaydet</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var model=@Html.Raw(Json.Encode(Model.CompanyGroups));
+    $(document).ready(function () {
+        $("#companyId").selectpicker();
+        $("#selectGroup").select2();
+    });
+    var Selected = new Array();
+    function SelectGroup(companyId) {
+        $("#selectGroup option").remove();
+        for (var i = 0; i < model.length; i++) {
+            if (model[i].CompanyID.CompanyId == companyId) {
+                $('#selectGroup').append($('<option>', {
+                    value: model[i].GroupID.GroupID,
+                    text: model[i].GroupID.GroupName
+                }));
+            }
+        }
+    }
+    $("#btnRecordDelete").click(function () {
+        Selected = $('#selectGroup').val();
+                var companyId = $("#companyId").val();
+        if (Selected.length == 0 && companyId == 01) {
+            toastr.error("Şirket Adı ve Kontrol Grup Adı boş bırakılamaz!");
+            $("#companyId").parent().addClass('RedBorder');
+            borderTime($("#companyId").parent());  
+            $(".form-group").children('span').addClass('RedBorder');
+            borderTime($(".form-group").children('span'))
+            }
+            else if (companyId == 01) {
+            toastr.error("Şirket Adı boş bırakılamaz!");
+            $("#companyId").parent().addClass('RedBorder');
+            borderTime($("#companyId").parent()); 
+            }
+        else if (Selected.length == 0) {
+            toastr.error("Kontrol Grup Adı boş bırakılamaz!");
+            $(".form-group").children('span').addClass('RedBorder');
+            borderTime($(".form-group").children('span'))
+            }
+            else {
+                $.ajax({
+                    url: '@Url.Action("DeleteRecordControl","Company")',
+                    type: 'POST',
+                    data: { Groupid: Selected, Companyid: companyId },
+                    success: function (result) {
+                        toastr.options = {
+                            "timeOut": "1000",
+                        };
+                        toastr.success(result);
+                        $("#DeleteRecordModal").modal('hide');
+                    },
+                    error: function (result) {
+                        toastr.error(result);
+                    }
+                });
+            }
+    });
+</script>

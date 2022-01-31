@@ -1,0 +1,463 @@
+﻿@using ACD_System.Extensions
+@model System.Data.DataSet
+@using System.Data
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- DataTables -->
+<link rel="stylesheet" href="~/assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="~/assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+<link rel="stylesheet" href="~/assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+
+<script src="~/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="~/assets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="~/assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="~/assets/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="~/assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="~/assets/plugins/jszip/jszip.min.js"></script>
+<script src="~/assets/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="~/assets/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="~/assets/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="~/assets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="~/assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
+<!--Confirm-->
+<link href="~/assets/plugins/jquery-confirm/css/jquery-confirm.css" rel="stylesheet" />
+<script src="~/assets/plugins/jquery-confirm/js/jquery-confirm.js"></script>
+
+<style>
+    #userTbl tbody tr td {
+        padding: 8px !important;
+        line-height: 1.42857143 !important;
+    }
+</style>
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <ol class="breadcrumb">
+                    <li class="hidden-xs breadcrumb-item">
+                        <a href="@Url.Action("Index","Home")">@Html.GetLang("AnaSayfa")</a>
+                    </li>
+
+                    <li class="hidden-xs breadcrumb-item">
+                        <a href="#">@Html.GetLang("Kullanıcı")</a>
+                    </li>
+                    <li class="breadcrumb-item active">
+                        <a href="#" id="export_title">Kullanıcı Tablosu</a>
+                    </li>
+                </ol>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item">
+                        <div class="btn-group btn-action">
+                            <button type="button" class="btn btn-outline-primary dropdown-toggle btn-sub-action" data-toggle="dropdown">
+                                <i class="fa fas fa-ellipsis-v"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                <a class="dropdown-item" href="javascript:CreateUser()"><i class="fas fa-plus action-icon"></i>Yeni</a>
+                                @*<a class="dropdown-item" href="javascript:Edit()"><i class="far fa-edit action-icon"></i>Düzenle</a>
+                                    <a class="dropdown-item" href="javascript:EditSelected()"><i class="far fa-edit action-icon"></i>Çoklu Düzenle</a>
+                                    <a class="dropdown-item" href="javascript:SelectAll()" title="Tümünü Seç"><i class="fas fa-check action-icon"></i>Tümünü Seç</a>
+                                    <a class="dropdown-item" href="javascript:Delete()" title="Seçilenleri Sil"><i class="far fa-trash-alt action-icon"></i>Sil</a>*@
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" id="userGroupBtn" href="@Url.Action("UserMenu","User")"><i class="fa  fa-user action-icon"></i>@Html.GetLang("KullanıcıGrubu-Menu")</a>
+                            </div>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header" style="background-color:#ddd;">
+                    </div>
+                    <div class="card-body">
+                        <div class="table-toolbar">
+                            <div class="row">
+                                <div class="col-md-6">
+
+                                </div>
+                                <div class="col-md-6">
+
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table table-striped table-bordered table-hover" id="usersTbl">
+                            <thead>
+                                <tr>
+                                    @foreach (DataColumn item in Model.Tables[2].Columns)
+                                    {
+                                        if (item.ColumnName != "ID")
+                                        {
+                                            <th>
+                                                @Html.GetLang(item.ColumnName)
+                                            </th>
+                                        }
+                                    }
+                                    <th style="width:100px;"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (DataRow row in Model.Tables[2].Rows)
+                                {
+                                    <tr class="odd gradeX" data-id="@row["ID"]">
+                                        @foreach (DataColumn col in Model.Tables[2].Columns)
+                                        {
+                                            if (col.ColumnName != "ID")
+                                            {
+
+                                                <td>@row[col.ColumnName]</td>
+                                            }
+                                        }
+                                        <td style="text-align:center;">
+                                            <div class="btn-group">
+                                                <button class="btn btn-info float-right btn-xs btn-edit-user" title="@Html.GetLang("Kullanıcı Düzenle")"><i class="far fa-edit"></i></button>
+                                                <button class="btn btn-danger btn-xs btn-remove-user" title="@Html.GetLang("Kullanıcı Sil")"><i class="far fa-trash-alt"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--Create User Modal-->
+<div class="modal fade" id="createUserModal" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="border-radius:24px;">
+            <div class="modal-header" style="background-color: #337ab7;border-top-right-radius: 23px;border-top-left-radius: 23px;color: white;">
+                <h4 class="modal-title">Yeni Kullanıcı</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="yenisutunadi">@Html.GetLang("KullanıcıAdı")</label>
+                            <input class="form-control form-control-sm" id="username" placeholder="@Html.GetLang("KullanıcıAdı")..." />
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="yeniveritipi">@Html.GetLang("AdıSoyadı")</label>
+                            <input class="form-control form-control-sm suggest" id="name" placeholder="@Html.GetLang("AdıSoyadı")..." />
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="yenigorunumadi">@Html.GetLang("Usr_eMail")</label>
+                            <input class="form-control form-control-sm" id="email" placeholder="@Html.GetLang("Usr_eMail")..." />
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="yenigorunumadi">@Html.GetLang("Usr_Phone")</label>
+                            <input class="form-control form-control-sm" id="phone" placeholder="@Html.GetLang("Usr_Phone")..." />
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="yenigorunumadi">@Html.GetLang("Usr_Password")</label>
+                            <input class="form-control form-control-sm" id="password" placeholder="@Html.GetLang("Usr_Password")..." />
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="yenigorunumadi">@Html.GetLang("Usr_GroupID")</label>
+                            <select class="select2 form-control form-control-sm" id="kullanici_grup" data-placeholder="Lütfen Kullanıcı Grubu Seçiniz...">
+                                <option value=""></option>
+                                @foreach (DataRow item in Model.Tables[0].Rows)
+                                {
+                                    <option value="@item["UsG_ID"]">@item["UsG_Name"]</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="departmentname">@Html.GetLang("Departman")</label>
+                            <select class="select2 form-control-sm form-control" id="kullanici_departman_save" multiple="multiple" data-placeholder="Lütfen Kullanıcı Departmanı Seçiniz..." style="width: 100%;">
+                                <option value=""></option>
+                                @foreach (DataRow item in Model.Tables[1].Rows)
+                                {
+                                    <option value="@item["Dep_ID"]">@item["Dep_Name"]</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn bg-gradient-danger btn-sm" data-dismiss="modal">Kapat</button>
+                <button type="button" class="btn bg-gradient-success btn-sm" onclick="SaveUser()">Kaydet</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="updateUserModal" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="border-radius:24px;">
+            <div class="modal-header" style="background-color: #337ab7;border-top-right-radius: 23px;border-top-left-radius: 23px;color: white;">
+                <h4 class="modal-title">Kullanıcı Düzenle</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="yenisutunadi">@Html.GetLang("KullanıcıAdı")</label>
+                            <input type="text" id="u_id" style="visibility:hidden" />
+                            <input class="form-control form-control-sm" id="u_username" placeholder="@Html.GetLang("KullanıcıAdı")..." disabled />
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="yeniveritipi">@Html.GetLang("AdıSoyadı")</label>
+                            <input class="form-control suggest form-control-sm" id="u_name" placeholder="@Html.GetLang("AdıSoyadı")..." />
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="yenigorunumadi">@Html.GetLang("Usr_eMail")</label>
+                            <input class="form-control form-control-sm" id="u_email" placeholder="@Html.GetLang("Usr_eMail")..." />
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="yenigorunumadi">@Html.GetLang("Usr_Phone")</label>
+                            <input class="form-control form-control-sm" id="u_phone" placeholder="@Html.GetLang("Usr_Phone")..." />
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="yenigorunumadi">@Html.GetLang("Usr_GroupID")</label>
+                            <select class="select2 form-control form-control-sm" id="u_kullanici_grup" data-placeholder="Lütfen Kullanıcı Grubu Seçiniz...">
+                                <option value=""></option>
+                                @foreach (DataRow item in Model.Tables[0].Rows)
+                                {
+                                    <option value="@item["UsG_ID"]">@item["UsG_Name"]</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="yenidepartman">@Html.GetLang("Departman")</label>
+                            <select class="select2 form-control-sm  form-control" multiple id="kullanici_department_update" data-placeholder="Lütfen Kullanıcı Departman Seçiniz...">
+                                <option value=""></option>
+                                @foreach (DataRow item in Model.Tables[1].Rows)
+                                {
+                                    <option value="@item["Dep_ID"]">@item["Dep_Name"]</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn bg-gradient-danger btn-sm" data-dismiss="modal">Kapat</button>
+                <button type="button" class="btn bg-gradient-success btn-sm" onclick="UpdateUser()">Kaydet</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    var table;
+    $(document).ready(function () {
+        $('.select2').select2();
+
+
+        table = $('#usersTbl');
+        $('#usersTbl').DataTable({
+            "language": {
+                "aria": {
+                    "sortAscending": ": activate to sort column ascending",
+                    "sortDescending": ": activate to sort column descending"
+                },
+                "emptyTable": "@Html.GetLang("emptyTable")",
+                "info": "@Html.GetLang("datatable_info")",
+                "infoEmpty": "@Html.GetLang("infoEmpty")",
+                "infoFiltered": "@Html.GetLang("infoFiltered")",
+                "lengthMenu": "@Html.GetLang("lengthMenu")",
+                "search": "@Html.GetLang("datatable_search")",
+                "zeroRecords": "@Html.GetLang("zeroRecords")",
+                "paginate": {
+                    "previous": "Prev",
+                    "next": "Next",
+                    "last": "Last",
+                    "first": "First"
+                }
+            },
+            "bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
+            "lengthMenu": [
+                [10, 20, 50, 100, -1],
+                [10, 20, 50, 100, "All"] // change per page values here
+            ],
+
+            //"pagingType": "bootstrap_full_number"
+
+        });
+
+    });
+
+    function CreateUser() {
+        $("#createUserModal").modal("show");
+    };
+
+    $(document).on("click", ".btn-remove-user", function () {
+        var id = $(this).parents("tr").attr("data-id");
+        var user = $(this).parents("tr").find("td:first").text();
+        $.confirm({
+            typeAnimated: true,
+            type: 'red',
+            title: false,
+            content: '<i class="fa fa-exclamation-triangle" style="font-size:25px;  color:#e74c3c"></i><span style="padding-left:5px; font-weight:600;">' + user + ' kullanıcısını silmek istediğinizden emin misiniz?</span>',
+            buttons: {
+                tryAgain: {
+                    text: 'Tamam',
+                    btnClass: 'confirm-button-green',
+                    action: function () {
+                        $.ajax({
+                            url: '@Url.Action("DeleteUser","User")',
+                            type: 'POST',
+                            data: { "userid": id },
+                            error: function () {
+
+
+                            },
+                            success: function (result) {
+                                if (result.Success) {
+                                    toastr.success(result.Message);
+                                    setTimeout(function () {
+                                        location.reload();
+                                    }, 1500)
+                                }
+                                else {
+                                    toastr.error(result.Message);
+                                    return false;
+                                }
+                            }
+                        });
+                    }
+                },
+                close: {
+                    text: 'İptal',
+                    btnClass: 'confirm-button-red',
+                }
+            }
+        });
+
+    });
+
+    function SaveUser() {
+        ShowSpinner();
+        console.log("kayıt");
+        var data = {
+            "code": $("#username").val(),
+            "name": $("#name").val(),
+            "mail": $("#email").val(),
+            "phone": $("#phone").val(),
+            "password": $("#password").val(),
+            "group": $("#kullanici_grup").val(),
+            "department": $("#kullanici_departman_save").val()
+        }
+        $.ajax({
+            url: '@Url.Action("CreateUser","User")',
+            type: 'POST',
+            data: data,
+            error: function () {
+            },
+            success: function (result) {
+                setTimeout(HideSpinner, 2000);
+                if (result.Success == true) {
+                    toastr.success(result.Message);
+                    setTimeout(function () {
+                        location.reload();
+
+                    }, 1500)
+                }
+                else {
+                    toastr.error(result.Message);
+                }
+            }
+        })
+    }
+
+    function UpdateUser() {
+        ShowSpinner();
+        var data = {
+            "code": $("#u_username").val(),
+            "name": $("#u_name").val(),
+            "mail": $("#u_email").val(),
+            "phone": $("#u_phone").val(),
+            "group": $("#u_kullanici_grup").val(),
+            "id": $("#u_id").val(),
+            "department": $("#kullanici_department_update").val()
+        }
+        $.ajax({
+            url: '@Url.Action("UpdateUser","User")',
+            type: 'POST',
+            data: data,
+            error: function () {
+            },
+            success: function (result) {
+                setTimeout(HideSpinner, 2000);
+
+                if (result.Success == true) {
+                    toastr.success(result.Message);
+                    setTimeout(function () {
+                        location.reload();
+
+                    }, 1500)
+                }
+                else {
+                    toastr.error(result.Message);
+                }
+            }
+        })
+    }
+
+    $(document).on("click", ".btn-edit-user", function () {
+        var id = $(this).parents("tr").attr("data-id");
+        $.ajax({
+            url: '@Url.Action("GetUser","User")',
+            type: 'POST',
+            data: { "userid": id },
+            error: function () {
+            },
+            success: function (result) {
+                //console.log(result);
+                $("#u_id").val(result.id);
+                $("#u_name").val(result.name);
+                $("#u_username").val(result.code);
+                $("#u_email").val(result.mail);
+                $("#u_phone").val(result.phone)
+                $("#u_kullanici_grup").select2("val", result.group);
+
+                var items = new Array();
+                items = result.department2.split(',');
+                if (items[0] != "")
+                    $("#kullanici_department_update").select2("val", items);
+                $("#updateUserModal").modal("show");
+            }
+        });
+    });
+</script>

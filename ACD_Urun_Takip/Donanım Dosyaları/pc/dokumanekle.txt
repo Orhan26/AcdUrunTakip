@@ -1,0 +1,26 @@
+<form enctype="multipart/form-data">
+<div>
+        <label>Dokuman Adı</label>
+        <input id="txtadi" type="text"  class="form-control" style="color:blue;width:300px" />
+    </div>
+    <div>
+        <label>Şirket Adı</label>
+       <select id="txtSadi" style="width:150px;height:20px">
+       @foreach (var srk in SirketList)
+       { 
+         <option value="@srk.SirketID">@srk.SirketAdi</option>
+        }
+      </select>
+    </div>
+    <div>
+        <label>Dosya Ekle</label>
+        @using (Html.BeginForm("DokumanEkle", "Dosya", FormMethod.Post, new { enctype = "multipart/form-data"}))
+        {
+          <input type="file" name="file" value="file" />
+          <button id="btn" style="margin-top:20px" class="btn btn-danger" type="submit">Kaydet</button>
+        }
+    </div>
+<div>
+   
+</div> 
+    </form>

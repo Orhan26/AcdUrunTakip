@@ -1,0 +1,152 @@
+ï»¿
+@using ACD_Urun_Takip.Models;
+@model DocumentInfo
+
+@{
+    ViewBag.Title = "AddUpdateDocument";
+    List<CompanyInformation> SirketList = (List<CompanyInformation>)TempData["SirketList"];
+}
+<script src="~/assets/plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="~/assets/plugins/jquery-confirm/js/jquery-confirm.js"></script>
+
+
+
+<div class="modal fade" id="createCompanyModal" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="border-radius:24px;">
+            <div class="modal-header" style="background-color: #337ab7;border-top-right-radius: 23px;border-top-left-radius: 23px;color: white;padding: 0.5rem">
+                @if (Model.DocumentName == null)
+                {
+                    <h4 class="modal-title">Yeni DÃ¶kÃ¼man</h4>
+                }
+                else
+                {
+                    <h4 class="modal-title">DÃ¶kÃ¼man DÃ¼zenle</h4>
+                }
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            @if (Model.DocumentName != null)
+                            {
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Dosya Yolu</label><i class="far fa-copy hover" onclick="copyToClipboard()" style="margin-left:10px"></i>
+                                        <input class="form-control form-control-sm suggest" value="@Model.DocumentPath" id="copytext" disabled />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>DÃ¶kÃ¼man AdÄ±</label>
+                                        <input class="form-control form-control-sm suggest" value="@Model.DocumentName" disabled />
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Åirket AdÄ±</label>
+                                        <input class="form-control form-control-sm suggest" value="@Model.Company.SirketAdi" disabled />
+                                    </div>
+                                </div>
+                                <form method="post" id="frm">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                  <input type="file" name="uploadFiles" style="margin-bottom:20px;" />
+                                                </div>
+                                            </div>
+                                            <input class="form-control form-control-sm suggest" name="date" value="@DateTime.Now" style="display:none" />
+                                            <input value="@Model.DocumentId" name="id" style="display:none" />
+                                            <div class="col-md-12">
+                                                <div class="form-group" style="margin-top: -29px;">
+                                                    <label>Åirket AdÄ±</label><br />
+                                                    <select id="SelectCompany" name="companyId" style="border-radius:5px;width:100%;height:30px;">
+                                                        @foreach (var srk in SirketList)
+                                                        {
+
+                                                            <option value="@srk.SirketID">@srk.SirketAdi</option>
+                                                        }
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group" style="margin-top: -7px;">
+                                                    <label>Version</label>
+                                                    <input class="form-control form-control-sm suggest" name="version" value="@Model.Version" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer" style="margin-bottom: -27px;padding: 0.5rem;">
+                                        <button type="button" class="btn bg-gradient-danger btn-sm" data-dismiss="modal">Kapat</button>
+                                        <button type="submit" class="btn bg-gradient-success btn-sm" id="btn">Kaydet</button>
+                                    </div>
+                                </form>
+                            }
+                            else
+                            {
+                                <form method="post" action="" id="frmm"> 
+                                   <div class="col-md-12">
+                                       <div class="form-group">
+                                          <input  type="file"  name="uploadingFiles" />
+                                       </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Åirket AdÄ±</label><br />
+                                            <select id="SelectCompany" name="id" style="border-radius:5px;width:100%;height:30px;">
+                                                <option value="01">SeÃ§iniz</option>
+                                                @foreach (var srk in SirketList)
+                                                {
+
+                                                    <option value="@srk.SirketID">@srk.SirketAdi</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <input class="form-control form-control-sm suggest" name="Tarih" value="@DateTime.Now" style="display:none" />
+        
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Version</label>
+                                            <input class="form-control form-control-sm suggest" id="version" Name="version" placeholder="Version..." />
+                                        </div>
+                                    </div>
+
+                                    <div class="modal-footer" style="margin-bottom: -24px;padding:0rem">
+                                        <button type="button" class="btn bg-gradient-danger btn-sm" data-dismiss="modal">Kapat</button>
+                                        <button type="submit" class="btn bg-gradient-success btn-sm" id="btn">Kaydet</button>
+                                    </div>
+                                </form>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function copyToClipboard() {
+        var copyText = document.getElementById("copytext");
+        copyText.select();
+        copyTe‰PNG
+
+   IHDR  Ö       ¯¦Yê   sRGB ®Îé   DeXIfMM *    ‡i                           Ö             :Øf  )`IDATxí}	|EöU÷Ìä"„C ¬²qU¼Tõ ”+!ëúEQ	I!‡?ı±‹øËÁ!*¹8DÜuU¼%	°  "rªÀÏ‹(Š (áH2ÉLw×ÿûzÒ“É¤{2	‡®ÿîÏ'éîªW¯^½ªzWÕt1p	!¤YEKN§{@òI}œ>§¬Ï¬ùË:„ªdñb!ç”>
+&œ¼U«V9f”,ïùì?ËÛ†O09…¥íÍ`
+Vµ±Â3½hygªË¬Ü‰H+)Ù½xñW0.ê·ÙóVv	N§÷gËË#f-^e–gÕF3Ø_+xúôÂUí~­ú[[ïÂ…«"­ú¤µ8©ÜÉäÇÉÄ}<m¶ËÚøOá 'BsKVÄ1¥n6âÁù!.X.ñÿÎLK*>ÙÉ)XRÄ$ùµìÔÄ÷­ê"%òÍÁŠıÙé#LpNÑÒîN)²jRÊÀŸÍpRqWh“„`..±İP@]˜`]\ÜY41}Ø×ferŠÊnæª¸…qÑ‰1ŞQ’ø©I¥(Ëó
+ËŸ¯ú	ÆÚ0ÎVƒ®tÂAÔ]WûçÌƒ¼Yâã©ŒŸ›çà/Ÿ îíYã“ï4ÒÃ½ç/9K(,Cc,uôÀ_yfZr•Ï/(¦11A[›§sÄ#)Ãöå•e»_01Ì!;†L7üc£>äİÎTöhõ¢ŠÓÑæ–`æ•ÿEUÕ÷9ãŒrÑ	ÒŸ'$&ÖïÇsÏ-(}sé¥Ì´Ä·<¹e)Lh‚Gãs‹—\Ì¾HpügìtÆÄÖ¬ôäDÖê>½péEŠ¦lG\‘6âC¸g£Ï¾ÊJK*0Òè;gÉŞèhù’	c¦>æØ.œ•B™Ù©ÉoÑXaš˜¾{˜Ä“²ÓFl^Tz¢±BĞ|ÆyœÄùTšS:O5õ©ìôäøs
+JŒ‰’.v×ŠBS©pÛÇ¹È2û<~XÑJxtm40VÑ;jY™•>â^+^[ÚïØeÆØ ­1\ˆ­BvÜ—:ü[ôk)ÚşVfúˆzøG†_^AÙw\’¯BKE7¡!°.kLF±w™$¦ƒ¯•.ûnsà·Ì‡OØZqñlFZÒÜ)²=•Âöê§.©ÇS^/«©EŠZ“ƒç5Á¸ÈÛ­¨({Jã¬Pâì*¡±Şd.½èeÊmğ`ß˜”2ôÿ‚ËILû>#}Äà‡F
+MUÄ»€)Í/,»÷nYãGôçè¬TöoÌ/,½Š„·Ûã~†Ë|NVêˆWrç,;_S•e¨éÈ‘\%üu™!¹"&’Ş[|qY‹Šf‘ğ'a[Xº
+õ÷Z{¸À!9ûMNz ÂkJ­¢<üJõ(›¡èBCdlÔìÖ¦·‰¼düèë~®§oÍ8@Lk€ªâìcŞMÒOE”*gò£YéÃß£ê(¢Nµ*SÇ¡å¯«‚¥ Ş¯XÃ)
+†ñ”0JÊµˆŸ0*ñ(«« TIaoÎ+.»LQÅB.‹QYã’·¾gŸ/ïTëQÃò¸¡|¢ÈBêã¼Â²:ğ¾›ASîœÒmáòÃ‚Ö£:.Iz<Ø¸ …m‰Ûd@	’RÖÇyæjª§	U}ø¯‡R}ÛCxö+Öé…åC`À}›™6üğ‹13ˆ¸€º.YÖµÖ«üZy9¢@ı¨ˆ}Ùø-sÀá9pèX†k1Éf¦ùH9ò|tï/·`é•L¨31!âàñ	&³ÇÈJ'å»ûàîõ‚IÏBQŒ#ÓZbòìŒôÄWsËşÖk/X«“ãœE+;VU¹ßNè”p-•r™¡1)2"ª<¼©pAx¬Ë/(¢1m6ği0Ï× å…GRdº0 ŞtXº£A¼)+k|ÒXÆÅ «?ãÚ\<¯±T§qUü\ş \	WyîÊJO|˜”%)Å±c{¯€àÊìdŞ¸g¦&oÌ4T¾*cpûèÂÿÛ¡ ÑsJÊe^Ø×á)Á¤ÿxÃÎêa}zÆŒ¢¼¬ñÃv@şòİÏËÎÇë§ğro íßJğÌÔÛ	¦¥WFJâ7FR—ğök4Y¢îğ0¤LJ•ò¡ÿérFzÒ2JË-XÒH ‘Ç™3§ôhõ1ï%0®Öa\.É}ŞE
+Î£²|)ç ¿ªd.OÉHKüÀ7.*
+1T.‚pm/í2:rç”]1ôõ`|…—“yß•àk3nâ¡®X'¦&ïm¦›şâòå˜71&Nº¨úˆ¶“ÆÍ•kI~Ti]M…æ‘T¼×Æ—PÅ<.xzÖ¸ºR¥ÜzOØÒnŒ!Ä[+øŠÖF5µ·QşŞ{Ö¢?D_LiíñKy÷OŸ·¼Çä†VPšÊ´{0şıŠ–Òš»(êY1ŒÈ;j’ ÿNseì|›¿6$L„Ëai¯6#„ÖZSŞ‚¤†ÇÜ“;%ò½f“R"x(´‹%&ºõ=/æJ'sÔ„6ƒ„˜Ë%/ƒ¸EV,ÁU«£°çZz†Ø¿ ŞclBçg=tÿµ¤â¡Ø£É:×„Z,~/êº@ÒÀ¥¦Ôèk•Òí `ğp¯€·ùèÖC P¤ã`á®cB¬T©6Á´Ó3Æ%b¯‹èÔ¾˜”*¥“R$å%_ÕÜz(B6—¤yTxÎĞ¸ô½şLÿ8ûã·ş_…—´¨|/Úï[·V3åXç¹ã|È/,¿<‘uHğ3˜à{”q¼ë^+¦k­İeÎ¯…›WwğĞ7`Å»aë@8ğè-ô¿9eS×!/†Av9Œ iªĞ²(½âçŠaè·NÔO0¤.í¶Q:ŸBI#3Ó“®€ÅjÔÓ›ùçtJ£¡¤ÇÀ0XIëñÍ€ëÙJ•r¼ôwáI…÷ê±ªÚ{Â)ŒÛ­ŞZ¨®ĞŞFç+lŠ Ş³:'~DøhäÏY’H3
+–^nÔÑˆ§õ¼­Íz´-áG(Z…¦İéïSZ.À
+w#zëÇ •ÁŒÏ+,£w"úxŠCp}|èó‹±—4r7Áéëø‚êàè²˜Şé2£Á—Óø¿>OÿˆKÚysì7›¿M`“Ô¥Ugr©ª2 ŞÅ6„át¥˜•’ôà7ñîLàğªpD<KÊäÑô¡ßC`.ƒgš4ñşa‡·â§êš¿”ÛhÙåš«?!ÇÆDÎ§ğ(MJ£kfá²Ëp«˜<>	¡R¸iÃişDÏú%˜§½£«®Ü"ãx
+ö7²Â¼G°£G£‚aámÊPƒÓw‡!TÚBÌÒÓ° häùî˜îœ×Â•$cã<&ÁÀ¨­Óã|üä»‡Vå7z…™‹µ±—|ğğ,.=Ì,Ô§eÉu³¤ñf3E9EÈ5P(|	m/F'¾óâaØ5÷ç–7­R _DBæˆá1–yß…ÄİyEeÓ`X¤¡'¯ t.K;0˜zAfpï‹%¯”ÖÍåĞ>
+aê¿AŸås=ÁƒaxÔñFPø GÇ&}	eÜ	

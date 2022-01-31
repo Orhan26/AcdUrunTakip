@@ -1,0 +1,268 @@
+﻿
+@using ACD_Urun_Takip.Models;
+@model CompanyInformation
+@{
+    ViewBag.Title = "AddCompanyView";
+
+}
+<script src="~/assets/plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="~/assets/plugins/jquery-confirm/js/jquery-confirm.js"></script>
+<script src="~/assets/plugins/inputmask/jquery.inputmask.js"></script>
+<script src="~/assets/plugins/inputmask/inputmask.js"></script>
+<script src="~/assets/js/acd.js"></script>
+<link href="~/assets/css/productTracking.css" rel="stylesheet" />
+
+<div class="modal fade" id="createCompanyModal" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content modalcontent">
+            <div class="modal-header modalheader-edit">
+                @if (Model.CompanyName == null)
+                {
+                    <h4 class="modal-title modaltitle-left">Yeni Şirket</h4>
+                }
+                else
+                {
+                    <h4 class="modal-title modaltitle-left">Şirket Düzenle</h4>
+                }
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body" style="margin-bottom: -5px;margin-top: -13px;">
+                <div class="row">
+                    @if (Model.CompanyName == null)
+                    {
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Şirket Adı</label>
+                                <input type="text" class="form-control form-control-sm jquery" data-alanadi="Şirket Adı" id="companyName" placeholder="ŞirketAdı..." required />
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Şirket Adı</label>
+                                <input class="form-control form-control-sm jquery" id="companyName" data-alanadi="Şirket Adı" value="@Model.CompanyName" />
+                            </div>
+                        </div>
+                    }
+                    @if (Model.Mail == null)
+                    {
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Mail</label>
+                                <input type="text" class="form-control form-control-sm jquery" id="mail" data-alanadi="Mail" placeholder="Mail..." />
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Mail</label>
+                                <input type="text" class="form-control form-control-sm suggest jquery" id="mail" data-alanadi="Mail" value="@Model.Mail" />
+                            </div>
+                        </div>
+                    }
+                    @if (Model.Phone == null)
+                    {
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="Phone">Telefon</label>
+                                <input type="tel" class="form-control form-control-sm jquery" data-alanadi="Telefon" id="phone" placeholder="Telefon..." />
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Telefon</label>
+                                <input type="tel" class="form-control form-control-sm jquery" id="phone" data-alanadi="Telefon" value="@Model.Phone" />
+                            </div>
+                        </div>
+                    }
+                    @if (Model.Address == null)
+                    {
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Adres</label>
+                                <input type="text" class="form-control form-control-sm " id="address" placeholder="Adres..." />
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Adres</label>
+                                <input class="form-control form-control-sm " id="address" value="@Model.Address" />
+                            </div>
+                        </div>
+                    }
+                    @if (Model.Authorized == null)
+                    {
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Yetkili Kişi</label>
+                                <input type="text" class="form-control form-control-sm jquery" data-alanadi="Yetkili Kişi" id="authorized" placeholder="Yetkili Kişi..." />
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Yetkili Kişi</label>
+                                <input class="form-control form-control-sm jquery" id="authorized" data-alanadi="Yetkili Kişi" value="@Model.Authorized" />
+                            </div>
+                        </div>
+                    }
+                    @if (Model.AuthorizedPhone == null)
+                    {
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Yetkili Telefon</label>
+                                <input type="tel" class="form-control form-control-sm jquery" data-alanadi="Yetkili Telefon" id="authorizedPhone" placeholder="Yetkili Telefon..." />
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Yetkili Telefon</label>
+                                <input type="tel" class="form-control form-control-sm jquery" id="authorizedPhone" data-alanadi="Yetkili Telefon" value="@Model.AuthorizedPhone" />
+                            </div>
+                        </div>
+                    }
+                    @if (Model.AuthorizedMail == null)
+                    {
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Yetkili Mail</label>
+                                <input type="text" class="form-control form-control-sm jquery" data-alanadi="Yetkili Mail" id="authorizedMail" placeholder="Yetkili Mail..." />
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Yetkili Mail</label>
+                                <input type="text" class="form-control form-control-sm jquery" id="authorizedMail" data-alanadi="Yetkili Mail" value="@Model.AuthorizedMail" />
+                            </div>
+                        </div>
+                    }
+
+                </div>
+
+                <div class="modal-footer" style="padding-top:0px;margin-bottom:-21px;margin-top:-3px;">
+                    <button type="button" class="btn bg-gradient-danger btn-sm btn-danger-width" data-dismiss="modal">Kapat</button>
+                    <button type="button" class="btn bg-gradient-success btn-sm" id="btnRecord">Kaydet</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var hata = false;
+    function MailKontrol(email)
+     {
+      var kontrol = /^([a-zA-Z0-9_.+-])+\@@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+      return kontrol.test(email);
+    }
+    $(document).ready(function () {
+        $("#phone").inputmask({ "mask": "(999) 999-9999" });
+        $("#authorizedPhone").inputmask({ "mask": "(999) 999-9999" }); 
+        $("#authorizedMail").inputmask("email");
+        $("#mail").inputmask("email");
+        var model = @Html.Raw(Json.Encode(Model));
+        console.log("aaa");
+        $("#btnRecord").click(function () {
+            hata = false;
+            $(".jquery").each(function (i,txt) {
+                if (isEmpty($(txt).val())) {
+                    toastr.error($(txt).data("alanadi") + " boş bırakılamaz!");
+                    hata = true;
+                    //$(txt).addClass('RedBorder');
+                    borderTime(txt);
+                }
+                else if ($(this).data("alanadi") == 'Yetkili Mail' || $(this).data("alanadi") == 'Mail') {
+                    var control = MailKontrol($(this).val());
+                    if (control == false) {
+                        toastr.error($(this).data("alanadi") + " bilgileri eksik veya hatalı!")
+                        hata = true;
+                        //$(txt).addClass('RedBorder');
+                        borderTime(txt);
+                    }
+                }
+                else if ($(this).data("alanadi") == 'Telefon' || $(this).data("alanadi") == 'Yetkili Telefon') {
+                    var sonuc = $(this).val().indexOf("_");
+                    if (sonuc > -1) {
+                        toastr.error($(this).data("alanadi") + " bilgileri eksik veya hatalı!")
+                        hata = true;
+                        //$(txt).addClass('RedBorder');
+                        borderTime(txt);
+                    }
+                }         
+            });
+            if (model.CompanyName == null) {
+                if (hata == false) {
+                    var Company = {
+                        CompanyName: $("#companyName").val(),
+                        Mail: $("#mail").val(),
+                        Phone: $("#phone").val(),
+                        Address: $("#address").val(),
+                        Authorized: $("#authorized").val(),
+                        AuthorizedPhone: $("#authorizedPhone").val(),
+                        AuthorizedMail: $("#authorizedMail").val()
+                    };
+                    $.ajax({
+                        url: '@Url.Action("AddCompany", "Company")',
+                        type: 'POST',
+                        data: Company,
+                        success: function (result) {
+                            toastr.success(result)
+                            RefreshTable();
+                            $('#createCompanyModal').modal('hide');
+                        },
+                        error: function (result) {
+                            toastr.error(result)
+                        }
+                    });
+                }
+            }
+
+            else {
+                if (hata == false) {
+                    var Company = {
+                        CompanyId: model.CompanyId,
+                        CompanyName: $("#companyName").val(),
+                        Mail: $("#mail").val(),
+                        Phone: $("#phone").val(),
+                        Address: $("#address").val(),
+                        Authorized: $("#authorized").val(),
+                        AuthorizedPhone: $("#authorizedPhone").val(),
+                        AuthorizedMail: $("#authorizedMail").val()
+                    };
+                    $.ajax({
+                        url: '@Url.Action("UpdateCompany","Company")',
+                        type: 'POST',
+                        data: Company,
+                        success: function (result) {
+                            toastr.success(result);
+                            RefreshTable();
+                            $('#createCompanyModal').modal('hide');
+                        },
+                        error: function (result) {
+                            alert(result);
+                        }
+                    });
+                }
+            }
+        });
+    });
+
+</script>

@@ -1,0 +1,197 @@
+﻿
+@using ACD_Urun_Takip.Models;
+@model ListInformation
+
+@{
+    ViewBag.Title = "AddDocument";
+}
+<link href="~/assets/plugins/boostrap-select/bootstrap-select.css" rel="stylesheet" />
+<script src="~/assets/plugins/boostrap-select/bootstrap-select.js"></script>
+<link href="~/assets/css/productTracking.css" rel="stylesheet" />
+
+<div class="modal fade" id="DocumentModal" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="border-radius:24px;">
+            <div class="modal-header" style="background-color: #337ab7;border-top-right-radius: 23px;border-top-left-radius: 23px;color: white;padding: 0.5rem;height:42px;">
+                @if (Model.DocumentInfo == null)
+                {
+                    <h4 class="modal-title modaltitle-left">Yeni Döküman</h4>
+                }
+                else
+                {
+                    <h4 class="modal-title modaltitle-left">Döküman Düzenle</h4>
+                }
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body" style="margin-top:-11px;">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            @if (Model.DocumentInfo != null)
+                            {
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Dosya Yolu</label><i class="far fa-copy hover" onclick="copyToClipboard()" style="margin-left:10px"></i>
+                                        <input class="form-control form-control-sm suggest" value="@Model.DocumentInfo.DocumentPath" id="copytext" disabled />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Döküman Adı</label>
+                                        <input class="form-control form-control-sm suggest" value="@Model.DocumentInfo.DocumentName" disabled />
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Şirket Adı</label>
+                                        <input class="form-control form-control-sm suggest" value="@Model.DocumentInfo.Company.CompanyName" disabled />
+                                    </div>
+                                </div>
+                                <form method="post" id="frm">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <input type="file" name="uploadFiles" style="margin-bottom:20px;" />
+                                                </div>
+                                            </div>
+                                            <input value="@Model.DocumentInfo.DocumentId" name="id" style="display:none" />
+                                            <div class="col-md-12">
+                                                <div class="form-group" style="margin-top: -27px;">
+                                                    <label>Version</label>
+                                                    <input id="version" class="form-control form-control-sm suggest" name="version" value="@Model.DocumentInfo.Version" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer" style="margin-bottom: -27px;padding: 0.0rem;">
+                                        <button type="button" class="btn bg-gradient-danger btn-sm btn-danger-width" data-dismiss="modal">Kapat</button>
+                                        <button type="button" onclick="SubmitForm(0)" class="btn bg-gradient-success btn-sm" id="btn">Kaydet</button>
+                                    </div>
+                                </form>
+                            }
+                            else
+                            {
+                                <form method="post" action="" id="frmm">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <input type="file" name="uploadingFiles" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Şirket Adı</label><br />
+                                            <select id="companyId" name="companyId" class="selectpicker show-tick show-menu-arrow">
+                                                <option value="0">Seçiniz</option>
+                                                @foreach (var srk in Model.Companies)
+                                                {
+
+                                                    <option value="@srk.CompanyId">@srk.CompanyName</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Version</label>
+                                            <input class="form-control form-control-sm suggest" id="version" Name="version" placeholder="Version..." />
+                                        </div>
+                                    </div>
+
+                                    <div class="modal-footer" style="margin-bottom: -24px;padding:0.0rem">
+                                        <button type="button" class="btn bg-gradient-danger btn-sm  btn-danger-width" data-dismiss="modal">Kapat</button>
+                                        <button type="button" onclick="SubmitForm(1)" class="btn bg-gradient-success btn-sm" id="btn">Kaydet</button>
+                                    </div>
+                                </form>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function copyToClipboard() {
+        var copyText = document.getElementById("copytext");
+        copyText.select();
+        copyText.setSelectionRange(0, 99999);
+        navigator.clipboard.writeText(copyText.value);
+    }
+    $(document).ready(function () {
+        $("#companyId").selectpicker();
+    });
+    function SubmitForm(deger) {
+        if (deger == 1) {
+            if ($("#version").val() == "" || $("#companyId").val() == 0) {
+                toastr.error("Şirket Adı ve Version bilgileri boş bırakılamaz!");
+                $("#version").addClass('RedBorder');
+                borderTime($("#version"));
+                return;
+            }
+            $('#frmm').submit();
+        }
+        else {
+            if ($("#version").val() == "") {
+                toastr.error("Version boş bırakılamaz!");
+                $("#version").addClass('RedBorder');
+                borderTime($("#version"));
+                return;
+            }
+            $('#frm').submit();
+        }
+    }
+        var model = @Html.Raw(Json.Encode(Model.DocumentInfo));
+        if (model == null) {
+            $("#frmm").on('submit', function (event) {
+                event.preventDefault();
+                    $.ajax({
+                        url: '@Url.Action("Upload","Document")',
+                        type: "POST",
+                        data: new FormData(this),
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        success: function (data) {
+                            if (data == "Dosya seçimi yapılmadı") {
+                                toastr.error(data);
+                            }
+                            else {
+                                toastr.success(data);
+                                $("#DocumentModal").modal('hide');
+                                RefreshTable();
+                            }
+                        },
+                        error: function (data) {
+                            toastr.error(data);
+                        }
+                    });
+            });
+        }
+        else {
+            $("#companyId").val(model.Company.CompanyId);
+            $('#frm').on('submit', function (event) {
+                event.preventDefault();
+                    $.ajax({
+                        url: '@Url.Action("UpdateDocument", "Document")',
+                        type: "POST",
+                        data: new FormData(this),
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        success: function (data) {
+                            toastr.success(data.sonuc);
+                            $("#DocumentModal").modal('hide');
+                            RefreshTable();
+                        },
+                        error: function (data) {
+                            toastr.error(data);
+                        }
+                });
+            });
+    }
+</script>
+
+

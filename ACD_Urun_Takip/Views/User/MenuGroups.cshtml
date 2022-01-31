@@ -1,0 +1,42 @@
+﻿@model ACD_Urun_Takip.Models.MenuProfileGroupModel
+@using ACD_Urun_Takip.Extensions
+@using System.Text.RegularExpressions
+@using ACD_Urun_Takip.Models
+@using ACD_Urun_Takip.Helper
+
+<div class="div-menu">
+    <div>
+        <span class="menu-header">Delete</span>
+        <span class="menu-header">Update</span>
+        <span class="menu-header">Create</span>
+        <span class="menu-header">Read</span>
+    </div>
+    <br />
+
+    <ul id='id_menuAuthentication' class='page-sidebar-menu page-sidebar-menu-light' data-keep-expanded='false' data-auto-scroll='true' data-slide-speed='200'>
+
+        @foreach (var item in Model.AllMenu.Where(x => x.HasChild && x.MenuUpperId == 0))
+        {
+            <li style='margin-top:5px;' data-id='@item.MenuId' class="li-user">
+                <a href='javascript:;' target='_self' class='links menu-link'>
+                    <span class='title' data-toggle='tooltip' data-placement='right'>
+                        @LanguageHelper.GetLangFromServer(Regex.Replace(item.Title, @"\s +", ""))
+                    </span>
+                    <span class='arrow'></span>
+                </a>
+                <input type='checkbox' ch-id='@item.MenuId' class='icheck check-@MenuPermission.Delete' @(item.IsDelete ? "checked" : "") />
+                <input type='checkbox' ch-id='@item.MenuId' class='icheck check-@MenuPermission.Update' @(item.IsUpdate ? "checked" : "") />
+                <input type='checkbox' ch-id='@item.MenuId' class='icheck check-@MenuPermission.Create' @(item.IsCreate ? "checked" : "") />
+                <input type='checkbox' ch-id='@item.MenuId' class='icheck tdcheck check-@MenuPermission.Read' @(item.IsRead ? "checked" : "") />
+
+
+                @{
+                    Html.RenderPartial("ChildMenuGroup", new ChildMenu() { ParentId = item.MenuId, Menu = Model.AllMenu });
+                }
+
+            </li>
+        }
+
+    </ul>
+</div>
+

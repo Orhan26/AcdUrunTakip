@@ -1,0 +1,35 @@
+tablo türü oluþturma:
+DefaultTableModel a=new DefaultTableModel();
+
+a tablosuna baþlýklar ekleme
+ a.setColumnIdentifiers(new String[]{"Personel","Yakýt","Plaka","Tutar","Litre"});
+
+a tablosuna satýrlarý ekleme
+a.addRow(new String[]{veri[sira][0],veri[sira][1],veri[sira][2],String.valueOf(sayi[sira][0]),String.valueOf(sayi[sira][1])});
+
+a tablosunu tablo1 e aktarmak
+table1.setModel(a);
+
+a tablosunun satýr sayýsýný 0 a eþitler yani siler.
+a.setRowCount(0);
+
+
+String iþlemleri 
+ 	String isim=tb1.getText();     //isim="Alican Parlak"
+        isim=isim.replaceAll(" ","");  //isimdeki boþluklarý siler
+        tb1.setText(isim);             //isim="AlicanParlak"
+
+	String isim=tb1.getText();     //isim="bbaaba"
+        isim=isim.replaceAll("a","");  //isimdeki a harflerini siler
+        tb1.setText(isim);	       //isim="bbb" oldu
+
+	String isim=tb1.getText();     //isim="Ali((Can(("
+        isim=isim.replaceAll("/)",""); //isimdeki ( iþaretini siler ancak özel karakter olduðu için baþýna \ yani yan slaþ koymamýz gerekir
+        tb1.setText(isim);	       //isim="AliCan"
+
+
+passwordField daki * iþaretini deðiþtimek:
+	passwordField.setEchoChar('v');  //þifrenin gözüken deðerini v harfi yapar char deðer olduðu için tek týrnak kullanýlmalýdýr.
+
+FormattedTextField ayarlama
+sað týk özellikler formatterFactory kýsmýnda.örneðin parantezli tel numarasý yazdýrmak için buraya bakýlýr.

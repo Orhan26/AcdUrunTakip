@@ -1,0 +1,92 @@
+ public ActionResult Upload(int id)
+        {
+            if (Request.Files.Count > 0)
+            {
+                var file = Request.Files[0];
+                if (file != null && file.ContentLength > 0)
+                {
+                    // burada dilerseniz dosya tipine gore filtreleme yaparak sadece istediginiz dosya formatindaki dosyalari yukleyebilirsiniz
+                    //if (file.ContentType == "image/jpeg" || file.ContentType == "image/jpg" || file.ContentType == "image/png" || file.ContentType == "image/gif")
+                    //{
+
+                    string sirketAdi = new SirketIslem().SirketGetir(id).SirketAdi;
+
+                    var fi = new FileInfo(file.FileName);
+                    var fileName = Path.GetFileName(file.FileName);
+                    //fileName = Guid.NewGuid().ToString() + fi.Extension;
+                    string path = Server.MapPath("~/Dosyalar/" + sirketAdi);//dosya adı yolu yani şirket dosyası
+
+                    var path2 = Path.Combine(Server.MapPath("~/Dosyalar/" + sirketAdi + "/"), fileName);
+                    Directory.CreateDirectory(path);//dosya yolu yoksa şirket yoksa oluşturma komutu
+
+                    file.SaveAs(path2);//dosya yolu ve dosyanın kaydı
+
+                    //}
+                    name = fileName;
+                    yol = path;
+
+                }
+            }
+            DosyaIslem yeni = new DosyaIslem();
+            yeni.DokumanEkle(id, name, yol);
+
+            return RedirectToAction("Index", "Dosya");
+        }
+        public ActionResult DosyaSil(int id)
+        {
+            DosyaBilgi gelen = new DosyaBilgi();
+            DosyaIslem dokuman = new DosyaIslem();
+            gelen=dokuman.DosyaGetir(id);
+            
+
+            string file_name = gelen.DokumanAdi;
+            string path = gelen.DokumanYolu + "/" +file_name;
+            FileInfo file = new FileInfo(path);
+            if (file.Exists)//check file exsit or not  
+            {
+                file.Delete();
+                dokuman.DokumanSil(id);
+            }
+            
+            return RedirectToAction("Index", "Dosya");
+        }
+
+
+ public ActionResult DosyaGuncelle(int id,int SirketId,string DosyaGuncel)
+        {
+            DosyaBilgi gelen = new DosyaBilgi();
+            DosyaIslem dokuman = new DosyaIslem();
+            gelen=dokuman.DosyaGetir(id);
+
+            string file_name = gelen.DokumanAdi;
+            string path = gelen.DokumanYolu + "/" + file_name;
+            FileInfo files = new FileInfo(path);
+            if (files.Exists)//check file exsit or not  
+            {
+                files.Delete();
+            }
+            if (Request.Files.Count > 0)
+            {
+                var file = Request.Files[0];
+                if (file != null && file.ContentLength > 0)
+                {
+                    string sirketAdi = new SirketIslem().SirketGetir(SirketId).SirketAdi;
+
+                    var fi = new FileInfo(file.FileName);
+                    var fileName = Path.GetFileName(file.FileName);
+                    //fileName = Guid.NewGuid().ToString() + fi.Extension;
+                    string yolu = Server.MapPath("~/Dosyalar/" + sirketAdi);//dosya adı yolu yani şirket dosyası
+
+                    var path2 = Path.Combine(Server.MapPath("~/Dosyalar/" + sirketAdi + "/"), fileName);
+                    Directory.CreateDirectory(yolu);//dosya yolu yoksa şirket yoksa oluşturma komutu
+
+                    file.SaveAs(path2);//dosya yolu ve dosyanın kaydı
+                    name = fileName;
+                    yol = yolu;
+                }               
+            }
+            DosyaIslem guncel = new DosyaIslem();
+            guncel.DokumanGuncelle(id, name, yol, SirketId);
+
+            return RedirectToAction("Index", "Dosya");
+        }

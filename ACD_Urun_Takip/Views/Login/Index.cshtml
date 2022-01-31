@@ -1,0 +1,174 @@
+﻿@using ACD_Urun_Takip.Extensions
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ACD_Urun_Takip | Log in </title>
+    <!-- Bootstrap CSS -->
+    <link href="~/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/assets/plugins/fontawesome-free/css/all.min.css">
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet" href="~/assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/assets/css/adminlte.min.css">
+    <!--Toastr-->
+    <link href="~/assets/plugins/toastr/toastr.css" rel="stylesheet" />
+    <!--Spinner-->
+    <link href="~/assets/css/spinner.css" rel="stylesheet" />
+</head>
+<body class="hold-transition login-page page-body">
+    <div class="login-box">
+        <!-- /.login-logo -->
+        <div class="card card-outline card-primary">
+            <div class="card-header text-center">
+                <!--TODO:Project Name-->
+                <p class="h1"><b>ACD</b></p>
+                <p class="login-box-msg text-uppercase">ACD System</p>
+            </div>
+            <div class="card-body">
+                <p class="login-box-msg">@Html.GetLang("Login to your account")</p>
+                <form class="form-login" onclick="return false;" method="post">
+                    @Html.AntiForgeryToken()
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" autocomplete="none" placeholder="Kullanıcı Adı" required id="userCode">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fa fa-user"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password" class="form-control" autocomplete="none" placeholder="Password" required id="userPassword">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="icheck-primary">
+                                <input type="checkbox" class="remember" id="remember">
+                                <label for="remember">
+                                    @Html.GetLang("Remember Me")
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <button type="button" id="loginBtn" class="btn btn-primary btn-block">Login</button>
+                        </div>
+                    </div>
+                </form>
+                <p class="mb-1">
+                    <a href="#">Şifrenizi mi unuttunuz ?</a>
+                </p>
+                <p class="mb-0">
+                    <a href="#" class="text-center">Şifrenizi sıfırlamak için buraya tıklayın</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <!-- jQuery -->
+    <script src="~/assets/plugins/jquery/jquery.min.js"></script>
+    <script src="~/assets/plugins/jquery-validation/jquery.validate.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/assets/js/adminlte.min.js"></script>
+    <!--Acd general-->
+    <script src="~/assets/js/acd.js"></script>
+    <!--iCheck 1.0.3-->
+    <script src="~/assets/plugins/icheck/js/icheck.js"></script>
+    <!--Toastr-->
+    <script src="~/assets/plugins/toastr/toastr.min.js"></script>
+
+    <script>
+        //$('.remember').iCheck();
+        $(function () {
+            $("#userCode").focus();
+        });
+        $('#userCode').keypress(function (e) {
+            if (e.which == 13) {
+                $('#loginBtn').click();
+            }
+        });
+        $("#userPassword").keypress(function (e) {
+            if (e.which == 13) {
+                $('#loginBtn').click();
+            }
+        });
+
+        $(document).on("click", "#loginBtn", function () {
+            ShowSpinner();
+            var Result;
+            var user = $("#userCode").val();
+            var password = $("#userPassword").val();
+            if (isEmpty(user) || isEmpty(password)) {
+                    $(".form-login").valid({
+                        debug: true,
+                        submitHandler: function () {
+                            return false;
+                        }
+                    });
+                    return false;
+                }
+            if ($(".form-login").valid) {
+                var remember = $("input[type='checkbox']").prop("checked") ? true : false;
+                var info = {
+                    UserName: user.toLowerCase(),
+                    Password: password,
+                    Remember: remember
+                }
+                var headers = {};
+                headers['__RequestVerificationToken'] = $('input[name="__RequestVerificationToken"]').val();
+
+                $.ajax({
+                    url: '@Url.Action("Index", "Login")',
+                    headers: headers,
+                    type: 'POST',
+                    data: info,
+                    error: function (error) {
+                        HideSpinner();
+                        toastr.error(error);
+                    },
+                    success: function (result) {
+                        if (result.Success == true) {
+                            Result = result;
+                            var tmp = '@Session["returnurl"]';
+                            if (tmp == null || tmp.toString() == "") {
+                                var language = Result.Lang;
+                                var url = "/" + language + "/Home/Index";
+                                window.location.href = url;
+
+                            }
+                            else {
+                                console.log(tmp.toString() == "");
+                            @{Session.Remove("returnurl");}
+                                window.location.href = tmp;
+                            }
+
+                        }
+                        else {
+                            HideSpinner();
+                            toastr.error(result.Message);
+                            return false;
+                            event.preventDefault();
+                        }
+                    }
+                });
+            }
+            });
+
+    </script>
+</body>
+</html>
+

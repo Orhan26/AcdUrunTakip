@@ -1,0 +1,146 @@
+﻿@using ACD_Urun_Takip.Models
+@model HardwareInfo
+@{
+    ViewBag.Title = "AddHardwareView";
+}
+
+<div class="modal fade" id="HardwareModal" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content modalcontent">
+            <div class="modal-header modalheader-edit">
+                @if (Model.HardwareName == null)
+                {
+                    <h4 class="modal-title modaltitle-left">Yeni Donanım</h4>
+                }
+                else
+                {
+                    <h4 class="modal-title modaltitle-left">Donanım Düzenle</h4>
+                }
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <form method="post" action="" id="frm">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <input type="file" id="file" name="uploadingFiles" />
+                                    </div>
+
+                                </div>
+                                @if (Model.DocumentName == null)
+                                {
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Donanım Adı</label>
+                                            <input id="hardwareName" class="form-control form-control-sm suggest" Name="hardwareName" placeholder="Donanım Adı..." />
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Donanım Adı</label>
+                                            <input id="hardwareName" class="form-control form-control-sm suggest" Name="hardwareName" value="@Model.HardwareName" />
+                                        </div>
+                                    </div>
+                                }
+                                @if (Model.HardwareType == null)
+                                {
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Donanım Tipi</label>
+                                            <input id="hardwareType" class="form-control form-control-sm suggest" Name="hardwareType" placeholder="Donanım Tipi..." />
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Donanım Tipi</label>
+                                            <input id="hardwareType" class="form-control form-control-sm suggest" Name="hardwareType" value="@Model.HardwareType" />
+                                        </div>
+                                    </div>
+                                }
+                                <input value="@Model.HardwareId" name="hardwareId" style="display:none" />
+                                @if (Model.HardwareName != null)
+                                {
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Döküman Adı</label>
+                                            <input class="form-control form-control-sm suggest" Name="DonanimTipi" placeholder="Döküman Adı..." value="@Model.DocumentName" disabled />
+                                        </div>
+                                    </div>
+                                }
+                                <div class="modal-footer" style="margin-bottom: -36px;padding: 0.5rem">
+                                    <button type="button" class="btn bg-gradient-danger btn-sm btn-danger-width" data-dismiss="modal">Kapat</button>
+                                    <button type="button" onclick="SubmitForm()" class="btn bg-gradient-success btn-sm" id="btn">Kaydet</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function SubmitForm() {
+        if (isEmpty(hardwareName.value)) {
+            toastr.error("Donanım Adı boş bırakılamaz!");
+            $("#hardwareName").addClass('RedBorder');
+            borderTime($("#hardwareName"));
+            return ;
+        }
+        if (isEmpty(hardwareType.value)) {
+            toastr.error("Donanım Tipi boş bırakılamaz!");
+            $("#hardwareType").addClass('RedBorder');
+            borderTime($("#hardwareType"));
+            return ;
+        }
+        $('#frm').submit();
+    }
+        var model = @Html.Raw(Json.Encode(Model));
+    $('#frm').on('submit', function (event) {
+        event.preventDefault();
+                if (model.HardwareName == null) {
+                        $.ajax({
+                            url: '@Url.Action("Upload","Hardware")',
+                            type: "POST",
+                            data: new FormData(this),
+                            contentType: false,
+                            cache: false,
+                            processData: false,
+                            success: function (result) {
+                                toastr.success(result);
+                                $("#HardwareModal").modal('hide');
+                                RefreshTable();
+                            },
+                            error: function (result) {
+                                toastr.error(result);
+                            }
+                        });
+                }
+                else {
+                        $.ajax({
+                            url: '@Url.Action("UpdateHardware","Hardware")',
+                            type: "POST",
+                            data: new FormData(this),
+                            contentType: false,
+                            cache: false,
+                            processData: false,
+                            success: function (data) {
+                                toastr.success(data);
+                                $("#HardwareModal").modal('hide');
+                                RefreshTable();
+                            },
+                            error: function (data) {
+                                toastr.error(data);
+                            }
+                      });
+               }
+    });
+</script>

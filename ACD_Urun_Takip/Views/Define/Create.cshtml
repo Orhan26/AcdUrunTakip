@@ -1,0 +1,58 @@
+﻿@model List<ACD_Urun_Takip.Models.SqlDataType>
+@using ACD_Urun_Takip.Helper
+@using ACD_Urun_Takip.Extensions
+@{
+    ViewBag.Title = "Create";
+    Layout = Request.IsAjaxRequest() ? null : "~/Views/Shared/_Layout.cshtml";
+    string tableName = HttpContext.Current.Request.QueryString["tablename"];
+
+}
+
+<!--TimePicker-->
+@*<link href="~/assets/plugins/jquery-timepicker/timepicker.css" rel="stylesheet" />
+<script src="~/assets/plugins/jquery-timepicker/jquery.timepicker.js"></script>*@
+
+
+@Html.CreateForm(Model, tableName)
+
+<script>
+    $(document).ready(function () {
+        $('input.timepicker').timepicker({
+            timeFormat: 'HH:mm',
+            interval: 60,
+            minTime: '00',
+            maxTime: '23:00',
+            startTime: '00:00',
+            dynamic: false,
+            dropdown: true,
+            scrollbar: false,
+            change: function (time) {
+                setdata();
+            }
+        });
+
+
+        $('.demo').minicolors({
+
+            control: $(this).attr('data-control') || 'hue',
+            defaultValue: "#000000",
+            inline: $(this).attr('data-inline') === 'true',
+            letterCase: $(this).attr('data-letterCase') || 'lowercase',
+            opacity: $(this).attr('data-opacity'),
+            position: $(this).attr('data-position') || 'bottom left',
+            theme: 'bootstrap'
+        });
+
+        $('.datetimepicker').datetimepicker({
+            locale: '@Url.RequestContext.RouteData.Values["lang"]',
+            defaultDate: new Date(),
+            format: '@Url.RequestContext.RouteData.Values["lang"]' == 'en' ? 'MM/DD/YYYY HH:mm:ss' : 'DD/MM/YYYY HH:mm:ss',
+            sideBySide: true
+        });
+
+        $(".select2").select2({
+            //allowClear: true,//TODO: Açılınca checkbox açılmıyor.
+        });
+
+    });
+</script>

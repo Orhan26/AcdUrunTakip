@@ -1,0 +1,30 @@
+ try
+            {
+                
+                if (checkBox1.Checked == true)
+                {
+                    dolu = "dolu";
+                }
+                else
+                {
+                    dolu = "boş";
+                }
+                ac.Open();
+                string sorgu = string.Format("update kisi set (kimlikno,adi,soyadi,tel,iban) values ('{0}','{1}','{2}','{3}','{4}') where (blok_adi,daire_no) values ('{5}','{6}')",
+                textBox1.Text, textBox2.Text, textBox3.Text, textBox4.Text, textBox5.Text,comboBox1.Text,comboBox2.Text);
+                komut = new OleDbCommand(sorgu, ac);
+                komut.ExecuteNonQuery();
+
+                string sorgu1 = string.Format("update daire set(kisi_Say,durum,dolu_bos) values ('{2}','{3}','{4}') where (blok_adi,daire_no) values ('{1}','{0}')", comboBox2.Text, comboBox1.Text, textBox6.Text, comboBox3.Text, dolu);
+                komut1 = new OleDbCommand(sorgu1, ac);
+                komut1.ExecuteNonQuery();    
+                
+            }
+            catch (Exception hata)
+            {
+                MessageBox.Show("Veritabanı bilgisi okunamadı." + hata.Message);
+            }
+            finally
+            {
+                ac.Close();
+            }

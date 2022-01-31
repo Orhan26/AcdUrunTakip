@@ -1,0 +1,208 @@
+﻿@using ACD_Urun_Takip.Models;
+@model ListInformation
+@{
+    ViewBag.Title = "AddLicence";
+}
+<link href="~/assets/plugins/boostrap-select/bootstrap-select.css" rel="stylesheet" />
+<script src="~/assets/plugins/boostrap-select/bootstrap-select.js"></script>
+<script src="~/assets/plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="~/assets/plugins/jquery-confirm/js/jquery-confirm.js"></script>
+<link href="~/assets/css/productTracking.css" rel="stylesheet" />
+
+<div class="modal fade" id="LicenceModal" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content modalcontent">
+            <div class="modal-header modalheader-edit">
+                @if (Model.LicenceInfo == null)
+                {
+                    <h4 class="modal-title modaltitle-left">Yeni Lisans</h4>
+                }
+                else
+                {
+                    <h4 class="modal-title modaltitle-left">Lisans Düzenle</h4>
+                }
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body" style="margin-bottom:-22px;margin-top:-13px;">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Şirket Adı</label><br />
+                            <select id="companyId" class="selectpicker show-tick show-menu-arrow sss" data-alanadi="Şirket Adı">
+                                <option value="0">Seçiniz</option>
+                                @foreach (var srk in Model.Companies)
+                                {
+                                    <option value="@srk.CompanyId">@srk.CompanyName</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Program Adı</label><br />
+                            <select id="programId" class="selectpicker show-tick show-menu-arrow sss" data-alanadi="Program Adı">
+                                <option value="0">Seçiniz</option>
+                                @foreach (var prg in Model.ProgramInfos)
+                                {
+                                    <option value="@prg.ProgramId">@prg.ProgramName</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Modül Adı</label><br />
+                            <select id="moduleId" class="selectpicker show-tick show-menu-arrow sss" data-alanadi="Modül Adı" data-none-selected-text="Seçiniz">
+                                <option value="0">Seçiniz</option>
+                                @if (Model.Modules != null)
+                                {
+                                    foreach (var mdl in Model.Modules)
+                                    {
+                                        <option value="@mdl.ModuleId">@mdl.ModuleName</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            @if (Model.LicenceInfo == null)
+                            {
+                                <label>Lisans Key</label>
+                                <input class="form-control form-control-sm sss" id="lisansKey" data-alanadi="Lisans Key" placeholder="Lisans Key..." />
+                            }
+                            else
+                            {
+                                <label>Lisans Key</label>
+                                <input class="form-control form-control-sm sss" id="lisansKey" data-alanadi="Lisans Key" placeholder="Lisans Key..." value="@Model.LicenceInfo.LicenceKey" />
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer" style="padding: 0.5rem">
+                    <button type="button" class="btn bg-gradient-danger btn-sm btn-danger-width" data-dismiss="modal">Kapat</button>
+                    <button type="button" class="btn bg-gradient-success btn-sm" id="btnRecord">Kaydet</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var hata = false;
+    var model = @Html.Raw(Json.Encode(Model.LicenceInfo));
+    $(document).ready(function () {
+        $("#companyId").selectpicker();
+        $("#programId").selectpicker();
+        $("#moduleId").selectpicker();
+        if (model != null)
+        {
+            $("#companyId").val(model.Company.CompanyId).trigger("change");;      
+            $("#programId").val(model.Program.ProgramId).trigger("change");
+            $("#lisansKey").val(model.LicenceKey).trigger("change");
+            $("#moduleId").val(model.Module.ModuleId.toString()).trigger("change");
+        }
+    });
+    $("#btnRecord").click(function () {
+        hata = false; 
+        $(".modal-body input,.modal-body select").each(function (i,txt) {
+            if ($(txt).val() == 0 | $(txt).val() == "") {
+                toastr.error($(txt).data("alanadi") + " boş bırakılamaz!");
+                hata = true;
+                if (txt.nodeName == "SELECT") {
+                    $(txt).parent().addClass('RedBorder');
+                    borderTime($(txt).parent());
+                } else {
+                    $(txt).addClass('RedBorder');
+                    borderTime($(txt));
+                }
+                borderTime($(txt));
+                hata = true;
+            }
+        });
+        var Company = new Object();
+        Company.CompanyId = companyId.value;
+        var Program = new Object();
+        Program.ProgramId = programId.value;
+        var Module = new Object();
+        Module.ModuleId = moduleId.value;
+        if (model == null) {
+            if (hata == false) {
+                var Kayit = {
+                    Company: Company,
+                    Program: Program,
+                    Module: Module,
+                    LicenceKey: lisansKey.value
+                };
+                $.ajax({
+                    url: '@Url.Action("AddLicence","Licence")',
+                    type: 'POST',
+                    data: { Add: Kayit },
+                    success: function (result) {
+                        toastr.success(result)
+                        $("#LicenceModal").modal('hide');
+                        RefreshTable();
+                    },
+                    error: function (result) {
+                        alert(result);
+                    }
+                });
+            }
+        }
+       else
+        {
+            if (hata == false) {
+                var update = {
+                    LicenceId: model.LicenceId,
+                    LicenceKey: lisansKey.value,
+                    Company: Company,
+                    Program: Program,
+                    Module: Module
+                };
+                $.ajax({
+                    url: '@Url.Action("UpdateLicence","Licence")',
+                    type: 'POST',
+                    data: { update: update },
+                    success: function (result) {
+                        toastr.success(result);
+                        $("#LicenceModal").modal('hide');
+                        RefreshTable();
+                    },
+                    error: function (result) {
+                        toastr.error(result);
+                    }
+                });
+            }
+         }
+    });
+    console.log("aa");
+    $("#programId").change(function () {
+        $.ajax({
+            url: '@Url.Action("Modull", "Licence")',
+            type: 'POST',
+            data: { Program: programId.value },
+            success: function (data) {
+                var length = data.length;
+                $("#moduleId option").remove();
+                $("#moduleId").append($('<option>', {
+                    text: 'Seçiniz',
+                    value: 0,
+                }));
+                for (var i = 0; i < length; i++) {
+                    $("#moduleId").append($('<option>', {
+                        text: data[i].ModuleName,
+                        value: data[i].ModuleId,
+                    }));
+                }
+                //$("#moduleId").selectpicker("refresh");
+                //$("#moduleId").val(model.Module.ModuleId).trigger("change");
+
+            },
+            error: function (sonuc) {
+                alert(sonuc)
+            }
+        });
+    });
+</script>
+

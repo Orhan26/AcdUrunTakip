@@ -1,0 +1,43 @@
+﻿@model ChildMenu
+
+@using ACD_Urun_Takip.Extensions
+@using System.Text.RegularExpressions
+@using ACD_Urun_Takip.Models
+@using ACD_Urun_Takip.Helper
+
+<ul class='sub-menu collapse' parent-id="@Model.ParentId">
+    @foreach (var item in Model.Menu.Where(x => x.MenuUpperId == Model.ParentId))
+    {
+        if (item.HasChild)
+        {
+            <li style='margin-top:5px;' data-id='@item.MenuId' class="li-user">
+                <a href='javascript:;' target='_self' class='links menu-link'>
+                    <span class='title' data-toggle='tooltip' data-placement='right'>
+                        @(LanguageHelper.GetLangFromServer(Regex.Replace(item.Title, @"\s+", "")))
+                    </span>
+                    <span class='arrow'></span>
+                </a>
+                <input type='checkbox' ch-id='@item.MenuId' class='icheck check-@MenuPermission.Delete' @(item.IsDelete ? "checked" : "") />
+                <input type='checkbox' ch-id='@item.MenuId' class='icheck check-@MenuPermission.Update' @(item.IsUpdate ? "checked" : "") />
+                <input type='checkbox' ch-id='@item.MenuId' class='icheck check-@MenuPermission.Create' @(item.IsCreate ? "checked" : "") />
+                <input type='checkbox' ch-id='@item.MenuId' class='icheck tdcheck check-@MenuPermission.Read' @(item.IsRead ? "checked" : "") />
+                @{
+                    Html.RenderPartial("ChildMenuGroup", new ChildMenu() { ParentId = item.MenuId, Menu = Model.Menu });
+                }
+            </li>
+        }
+        else
+        {
+            <li data-toggle='tooltip' data-placement='right' style=' margin-top:5px;' data-id='@item.MenuId' class="li-user">
+                <span class="menu-link">
+                    @(LanguageHelper.GetLangFromServer(Regex.Replace(item.Title, @"\s+", "")))
+                </span>
+                <input type='checkbox' ch-id='@item.MenuId' class='icheck check-@MenuPermission.Delete' @(item.IsDelete ? "checked" : "") />
+                <input type='checkbox' ch-id='@item.MenuId' class='icheck check-@MenuPermission.Update' @(item.IsUpdate ? "checked" : "") />
+                <input type='checkbox' ch-id='@item.MenuId' class='icheck check-@MenuPermission.Create' @(item.IsCreate ? "checked" : "") />
+                <input type='checkbox' ch-id='@item.MenuId' class='icheck tdcheck check-@MenuPermission.Read' @(item.IsRead ? "checked" : "") />
+            </li>
+        }
+
+    }
+</ul>

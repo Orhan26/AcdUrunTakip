@@ -1,0 +1,121 @@
+﻿.pull-right {
+    float: right !important;
+}
+
+.pull-left {
+    float: left !important;
+}
+.hover{
+    cursor:pointer;
+}
+.navbar-nav > .user-menu .user-image {
+    float: left;
+    width: 25px !important;
+    height: 25px !important;
+    border-radius: 50% !important;
+    margin-right: 10px !important;
+    margin-top: -2px !important;
+}
+
+.nav > li > a > img {
+    max-width: none;
+}
+
+.content-header {
+    border-bottom: 1px solid #ddd;
+    /*background-color: #f4f6f9;
+    margin-bottom: 5px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-shadow: 0px 5px 6px -1px rgba(166,161,161,0.88);
+    -moz-box-shadow: 0px 5px 6px -1px rgba(166,161,161,0.88);
+    box-shadow: 0px 5px 6px -1px rgba(166,161,161,0.88);
+    padding: 10px .5rem !important;*/
+}
+
+.breadcrumb-item a {
+    font-size: 1rem;
+}
+
+.btn-action .dropdown-toggle::after {
+    content: none !important;
+}
+
+.btn-action .dropdown-item:focus, .dropdown-item:hover {
+    background-color: lightblue/*#dee2e6*/ !important;
+}
+
+.btn-sub-action {
+    border: none !important;
+}
+
+.action-icon {
+    margin-right: .3rem;
+    width: 1.6rem;
+}
+
+
+.green.btn {
+    background-color: #FFFFFF;
+    color: #26a69a;
+}
+
+    .green.btn:hover {
+        color: #FFFFFF;
+        background-color: #26a69a;
+    }
+
+.btn-icon-only {
+    height: 32px;
+    width: 32px;
+    text-align: center !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.btn-circle {
+    border-radius: 25px !important;
+}
+
+.bookmark-active {
+    color: #ffc107 !important;
+}
+
+.content-define {
+    padding: 15px 0 0 0 !important;
+}
+
+.btn-update,
+.btn-insert {
+    float: right;
+    margin-top: 10px;
+}
+
+.red.btn {
+    color: #FFFFFF;
+    background-color: #cb5a5e;
+}
+
+.fileinput .btn {
+    vertical-align: middle;
+}
+
+#tempimage {
+    max-width: 150px;
+    max-height: 150px;
+    width: 100%;
+}
+
+input.icheck.enable {
+    margin-right: 10px;
+    width: 1rem;
+    height: 1.25rem;
+}
+
+/*Define Modal's label*/
+#defineForm .form-group label {
+    vertical-align: text-top;
+}

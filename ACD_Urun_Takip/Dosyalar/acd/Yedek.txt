@@ -1,0 +1,21 @@
+<div class="col-sm-6">
+    <ol class="breadcrumb float-sm-right">
+        <li class="breadcrumb-item">
+            <div class="btn-group btn-action">
+                <button type="button" class="btn btn-outline-primary dropdown-toggle btn-sub-action" data-toggle="dropdown">
+                    <i class="fa fas fa-ellipsis-v"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right" role="menu">
+                    <a class="dropdown-item" href="javascript:EkleModal()"><i class="fas fa-plus action-icon"></i>Yeni</a>
+                    <a class="dropdown-item" href="javascript:DuzenleModal()"><i class="far fa-edit action-icon"></i>Düzenle</a>
+                    @*<a class="dropdown-item" href="javascript:EditSelected()"><i class="far fa-edit action-icon"></i>Çoklu Düzenle</a>*@
+                    @*<a class="dropdown-item" href="javascript:EkleModal()" title="Tümünü Seç"><i class="fas fa-check action-icon"></i>Tümünü Seç</a>*@
+                    <a class="dropdown-item" href="javascript:Sil()" title="Seçilenleri Sil"><i class="far fa-trash-alt action-icon"></i>Sil</a>
+
+                </div>
+            </div>
+        </li>
+    </ol>
+</div>
+
+

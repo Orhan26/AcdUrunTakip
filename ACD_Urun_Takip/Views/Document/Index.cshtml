@@ -1,0 +1,218 @@
+﻿@model List<DocumentInfo>
+@using ACD_Urun_Takip.Models
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    
+}
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <ol class="breadcrumb">
+                    <li class="hidden-xs breadcrumb-item">
+                        <a href="@Url.Action("Index","Home")">AnaSayfa</a>
+                    </li>
+                    <li class="hidden-xs breadcrumb-item">
+                        <a href="#">Dökümanlar</a>
+                    </li>
+                    <li class="breadcrumb-item active">
+                        <a href="#" id="export_title">Döküman Tablosu</a>
+                    </li>
+                </ol>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item">
+                        <div class="btn-group btn-action">
+                            <button type="button" class="btn btn-outline-primary dropdown-toggle btn-sub-action" data-toggle="dropdown">
+                                <i class="fa fas fa-ellipsis-v"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                <a class="dropdown-item" href="javascript:AddModal()"><i class="fas fa-plus action-icon"></i>Yeni</a>
+                                <a class="dropdown-item" href="javascript:EditModal()"><i class="far fa-edit action-icon"></i>Düzenle</a>
+                                <a class="dropdown-item" href="javascript:Delete()"><i class="far fa-trash-alt action-icon"></i>Sil</a>
+                                <a class="dropdown-item hover" onClick="SelectAll(this)" id="selectAllBtn"><i class="far fa-check-square" style="margin-right: 15px"></i>Tümünü seç</a>
+                            </div>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body" style="border-top: 15px solid #ddd;">
+                        <div class="table-toolbar">
+                            <div class="row">
+                                <div class="col-md-6">
+
+                                </div>
+                                <div class="col-md-6">
+
+                                </div>
+                            </div>
+                        </div>
+                        <table id="tblDocument" class="table table-striped table-bordered table-hover" style="width:100%;">
+                            <thead>
+                                <tr>
+                                    <th class="th-first" ><i class="fas fa-search search" id="btnShowHide" style="color:blue"></i></th>
+                                    <th>Şirket Adı</th>
+                                    <th>Döküman Adı</th>
+                                    <th>Version Bilgisi</th>
+                                    <th>Tarih</th>
+                                    <th class="col-5per">İndir</th>
+                                    <th class="col-5per">Önizleme</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div id="bas"></div>
+
+<script>
+    $(document).ready(function () {
+        var dataTableParams = {
+            "columnDefs": [{
+                "targets": [5, 6],
+                "orderable": false
+            }],
+            "ajax": {
+                "url": '@Url.Action("JsonModel", "Document")',
+                "type": "POST",
+                "contentType": "application/json"
+            },
+            "columns": [
+                { "data": "chk" },
+                { "data": "CompanyName" },
+                {"data":"DocumentName"},
+                { "data": "Version" },
+                { "data": "Date" },
+                { "data": "Download" },
+                { "data": "Preview" }
+            ]
+        };
+        DefineTable("tblDocument", dataTableParams);
+    });
+    $("#btnShowHide").click(function () {
+        OpenSearch();         
+    });
+    
+        function SelectAll(text) {
+             SelectAll(text)
+    };
+    var isItOver = false;
+    function IsInputOver(bool) {
+        isItOver = bool;
+    }  
+     function preview(id) {
+        var documentid = id;
+        window.open('@Url.Action("Preview", "Document")?dkid= '+ documentid+'','_blank');
+    }
+
+    function stopPropagation(e) {
+        void 0 !== e.stopPropagation ? e.stopPropagation() : e.cancelBubble = !0
+    }
+    function AddModal() {
+            $.ajax({
+                url: '@Url.Action("AddDocument","Document")',
+                type: 'GET',
+                success: function (result) {
+                    $('#bas').html(result);
+                    $('#DocumentModal').modal('show');
+                },
+                error: function (sonuc) {
+                    alert(sonuc)
+                }
+            });
+        }
+            function EditModal() {
+                var selected = new Array();
+                $("#tblDocument input[type=checkbox]:checked").each(function () {
+                    selected.push($(this).val());
+
+                    });
+                if (selected.length > 1) {
+                    toastr.error("Düzenleme için birden fazla seçim yapılamaz...");
+                    }
+                    else if (selected.length == 0)
+                {
+                    toastr.error("Herhangi bir seçim yapılmadı...")
+                    }
+                    else {
+                        $.ajax({
+                            url: '@Url.Action("GetDocument","Document")',
+                            type: 'GET',
+                            data: { id: selected[0] },
+                            success: function (result) {
+
+                                $('#bas').html(result);
+                                $('#DocumentModal').modal('show');
+                            },
+                            error: function (sonuc) {
+                                alert(sonuc)
+                            }
+                        });
+                    }
+    }
+    console.log(" EKranı Geldi");
+    function Delete() {
+        var selected = new Array();
+        $("#tblDocument input[type=checkbox]:checked").each(function () {
+            selected.push($(this).val());
+        });
+        if (selected.length == 0) {
+            toastr.error("Herhangi bir seçim yapılmadı...");
+        }
+        else {
+                $.confirm({
+                typeAnimated: true,
+                type: 'red',
+                title: false,
+                content: '<i class="fa fa-exclamation-triangle" style="font-size:25px;  color:#e74c3c"></i><span style="padding-left:5px; font-weight:600;">Seçilen kayıtlar silinecek. Emin misiniz?</span>',
+                buttons: {
+                    tryAgain: {
+                        text: 'Tamam',
+                        btnClass: 'btn-success',
+                        action: function () {
+                            $.ajax({
+                                url: '@Url.Action("DeleteDocument", "Document")',
+                                type: 'POST',
+                                data: { id: selected },
+                                error: function (result) {
+                                    toastr.error(result);
+                                    return false;
+                                },
+                                success: function (result) {
+                                    toastr.success(result);
+                                    RefreshTable();
+                                }
+                            });
+                        }
+                    },
+                    close: {
+                        text: 'İptal',
+                        btnClass: 'btn-danger',
+                    }
+                }
+            });
+        }
+    };
+    function RefreshTable() {
+        var refreshTable = $('#tblDocument').DataTable();
+        refreshTable.ajax.reload();
+    }
+</script>
+
+

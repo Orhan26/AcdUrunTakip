@@ -1,0 +1,48 @@
+package soru1;
+
+
+import java.util.Random;
+import java.io.IOException;
+
+
+public class Soru1 {
+
+
+    public static void main(String[] args) throws IOException 
+    {
+        
+        int z1,z2,z1onceki=0,z2onceki=0,z1artis=0,z2artis=0,cikis=0;
+        Random r=new Random();
+        do
+        {
+        System.out.print("\n1.oyuncu zar atışı(bir tuşa basınız):");
+        System.in.read();
+        z1 =r.nextInt(6)+1;
+        System.out.println("1.oyuncu atılan:"+z1);
+        z1artis++;
+        if(z1==z1onceki)
+        {
+            System.out.print("\n1.oyuncu "+z1artis+" atışta kazandı");
+            cikis=1;
+        }
+        if(cikis==0)
+        {
+        System.out.print("\n2.oyuncu zar atışı(bir tuşa basınız):");
+        System.in.read();
+        z2 =r.nextInt(6)+1;
+        System.out.println("2.oyuncu atılan zar:"+z2);
+        z2artis++;
+        if(z2==z2onceki)
+        {
+            System.out.print("\n2.oyuncu "+z2artis+" atışta kazandı");
+            cikis=1;
+        }
+        z1onceki=z1;
+        z2onceki=z2;
+        }
+        }while(cikis==0);
+        
+   
+    }
+    
+}

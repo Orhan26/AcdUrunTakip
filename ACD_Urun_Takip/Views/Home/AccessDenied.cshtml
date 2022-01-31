@@ -1,0 +1,34 @@
+﻿@using ACD_Urun_Takip.Extensions
+@{
+    ViewBag.Title = "AccessDenied";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+
+    .page-content {
+        width: 100%;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        background-color: black
+    }
+
+    .word {
+        font-size: calc(42px + (60 - 22) * (100vw) / (1440 - 768));
+        color: red;
+        text-align: center;
+        font-family: fantasy;
+    }
+
+    .subword {
+        font-size: calc(42px + (60 - 42) * (100vw-700px) / (1440 - 768));
+        color: red;
+        text-align: center
+    }
+</style>
+<body>
+    <p class="word">403</p>
+    <p class="subword">@Html.GetLang("Access denied")</p>
+</body>
+

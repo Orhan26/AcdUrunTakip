@@ -1,0 +1,5 @@
+﻿@media (min-width: 992px) {
+    .sidebar-mini.sidebar-collapse .main-sidebar, .sidebar-mini.sidebar-collapse .main-sidebar::before {
+        /*width: 5.6rem ;*/
+    }
+}

@@ -1,0 +1,169 @@
+﻿@using ACD_Urun_Takip.Models
+@model ListInformation
+@{
+    ViewBag.Title = "AddModule";
+}
+<script src="~/assets/plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="~/assets/plugins/jquery-confirm/js/jquery-confirm.js"></script>
+<link href="~/assets/css/productTracking.css" rel="stylesheet" />
+<link href="~/assets/plugins/boostrap-select/bootstrap-select.css" rel="stylesheet" />
+<script src="~/assets/plugins/boostrap-select/bootstrap-select.js"></script>
+
+<div class="modal fade" id="ModuleModal" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content modalcontent">
+            <div class="modal-header modalheader-edit">
+                @if (Model.ModuleInformation == null)
+                {
+                    <h4 class="modal-title modaltitle-left">Yeni Modül</h4>
+                }
+                else
+                {
+                    <h4 class="modal-title modaltitle-left">Modül Düzenle</h4>
+                }
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Program Adı</label>
+                            <select id="program" class="selectpicker show-tick show-menu-arrow ">
+                                <option value="0">Seçiniz</option>
+                                @foreach (var prg in Model.ProgramInfos)
+                                {
+
+                                    <option value="@prg.ProgramId">@prg.ProgramName</option>
+
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-12" id="modulgizle">
+                        <div class="form-group">
+                            <label>Modül Adı</label>
+                            <select id="module" class="selectpicker show-tick show-menu-arrow ">
+                                <option value="0">Seçiniz</option>
+                                @foreach (var md in Model.Modules)
+                                {
+                                    <option value="@md.ModuleName">@md.ModuleName</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    @if (Model.ModuleInformation == null)
+                    {
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label style="font-size:15px">Yeni Modül</label>
+                                <input id="chkNewModul" type="checkbox" style="width: 19px;height: 15px;" />
+                                <input style="display:none" class="form-control form-control-sm" id="newModule" placeholder="Yeni Modül Adı..." />
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="modal-footer" style="padding: 0rem;margin-top:-5px;margin-bottom:-14px;">
+                    <button type="button" class="btn bg-gradient-danger btn-sm btn-danger-width" data-dismiss="modal">Kapat</button>
+                    <button type="button" class="btn bg-gradient-success btn-sm" id="btnRecord">Kaydet</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#module").selectpicker();
+        $("#program").selectpicker();
+        var model = @Html.Raw(Json.Encode(Model.ModuleInformation));
+        if (model != null) {
+            $("#module").val(model.ModuleName);
+            $("#program").val(model.Program.ProgramId);
+        }
+        $('#chkNewModul').on('click', function () {
+            if (this.checked) {
+                $('#newModule').css("display", "block");
+                $('#modulgizle').css("display", "none");
+            }
+            else {
+                $('#newModule').css("display", "none");
+                $('#modulgizle').css("display", "block");
+            }
+        });
+        $("#btnRecord").click(function () {
+            if (model == null) {
+                if ($('#chkNewModul').is(':checked', true)) {
+                    if ($("#program").val() == 0) {
+                        toastr.error("Program Adı boş bırakılamaz!");
+                        $("#program").parent().addClass('RedBorder');
+                        borderTime($("#program").parent());
+                    }
+                    else if ($("#newModule").val() == "") {
+                        toastr.error("Yeni Modül Adı boş bırakılamaz!");
+                        $("#newModule").addClass('RedBorder');
+                        borderTime($("#newModule"));
+                    }
+                    else {
+                        $.ajax({
+                            url: '@Url.Action("AddModule","Module")',
+                            type: 'POST',
+                            data: { programId: program.value, moduleName: newModule.value },
+                            success: function (sonuc) {
+                                toastr.success(sonuc);
+                                $("#ModuleModal").modal('hide');
+                                RefreshTable();
+                            },
+                            error: function (sonuc) {
+                                toastr.error(sonuc);
+                            }
+                        });
+                    }
+                }
+                else {
+                    console.log("aa");
+                    if ($("#program").val() == 0) {
+                        toastr.error("Program Adı boş bırakılamaz!");
+                        $("#program").parent().addClass('RedBorder');
+                        borderTime($("#program").parent());
+                    }
+                    else if ($("#module").val() == 0) {
+                        toastr.error("Modül Adı boş bırakılamaz!");
+                        $("#module").parent().addClass('RedBorder');
+                        borderTime($("#module").parent());
+                    }
+                    else {
+                        $.ajax({
+                            url: '@Url.Action("AddModule", "Module")',
+                            type: 'POST',
+                            data: { programId: program.value, moduleName: module.value },
+                            success: function (sonuc) {
+                                toastr.success(sonuc);
+                                $("#ModuleModal").modal('hide');
+                                RefreshTable();
+                            },
+                            error: function (sonuc) {
+                                toastr.error(sonuc);
+                            }
+                        });
+                    }
+                }
+            }
+                else {
+                $.ajax({
+                    url: '@Url.Action("UpdateModule", "Module")',
+                    type: 'POST',
+                    data: { programId: program.value, moduleName: module.value, moduleId: model.ModuleId },
+                    success: function (sonuc) {
+                        toastr.success("Düzenleme kaydedildi")
+                        $("#ModuleModal").modal('hide');
+                        RefreshTable();
+                    },
+                    error: function (sonuc) {
+                        toastr.error(sonuc);
+                    }
+                });
+            }
+        });
+    });
+</script>
+

@@ -1,0 +1,103 @@
+﻿@using ACD_Urun_Takip.Models;
+@model ProgramInfo
+@{
+    ViewBag.Title = "AddProgramView";
+
+}
+<script src="~/assets/plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="~/assets/plugins/jquery-confirm/js/jquery-confirm.js"></script>
+<link href="~/assets/css/productTracking.css" rel="stylesheet" />
+
+<div class="modal fade" id="ProgramModal" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content modalcontent">
+            <div class="modal-header modalheader-edit">
+                    @if(Model.ProgramName==null)
+                    {
+                     <h4 class="modal-title modaltitle-left">Yeni Program</h4>
+                    }
+                    else
+                    {
+                     <h4 class="modal-title modaltitle-left">Program Düzenle</h4>
+                    }
+                   
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        @if (Model != null)
+                        {
+                            <div class="form-group">
+                                <label>Program Adı</label>
+                                <input class="form-control form-control-sm" id="programName" placeholder="Program Adı..." value="@Model.ProgramName" />
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="form-group">
+                                <label>Program Adı</label>
+                                <input class="form-control form-control-sm" id="programName" placeholder="Program Adı..." />
+                            </div>
+                        }
+                        
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer" style="padding: 0.3rem">
+                <button type="button" class="btn bg-gradient-danger btn-sm btn-danger-width" data-dismiss="modal">Kapat</button>
+                <button type="button" class="btn bg-gradient-success btn-sm" id="btnRecord">Kaydet</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var model = @Html.Raw(Json.Encode(Model));
+    $("#btnRecord").click(function () {
+        if (model.ProgramName == null) {
+            if ($("#programName").val() == "") {
+                toastr.error("Program Adı boş bırakılamaz!");
+                $("#programName").addClass('RedBorder');
+                borderTime($("#programName"));
+            }
+            else {
+                var Program = {
+                    ProgramName: programName.value,
+                };
+                $.ajax({
+                    url: '@Url.Action("AddProgram","Program")',
+                    type: 'POST',
+                    data: Program,
+                    success: function (sonuc) {
+                        toastr.success(sonuc);
+                        $("#ProgramModal").modal('hide');
+                        RefreshTable();
+                    },
+                    error: function (sonuc) {
+                        toastr.error(sonuc);
+                    }
+                });
+            }
+        }
+        else {
+            var Program = {
+                ProgramId: model.ProgramId,
+                ProgramName: programName.value,
+            };
+            $.ajax({
+                url: '@Url.Action("UpdateProgram", "Program")',
+                type: 'POST',
+                data: Program,
+                success: function (sonuc) {
+                    toastr.success(sonuc);
+                     $("#ProgramModal").modal('hide');
+                     RefreshTable();
+                },
+                error: function (sonuc) {
+                    toastr.error(sonuc);
+                }
+            });
+        }
+    });
+</script>

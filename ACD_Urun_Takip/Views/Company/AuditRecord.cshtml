@@ -1,0 +1,151 @@
+﻿@using ACD_Urun_Takip.Models
+@model ListInformation
+@{
+    ViewBag.Title = "AuditRecord";
+}
+<link href="~/assets/plugins/select2/css/select2.min.css" rel="stylesheet" />
+<script src="~/assets/plugins/select2/js/select2.full.min.js"></script>
+<link href="~/assets/plugins/boostrap-select/bootstrap-select.css" rel="stylesheet" />
+<script src="~/assets/plugins/boostrap-select/bootstrap-select.js"></script>
+
+
+<div class="modal fade" id="createGroupModal" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content modalcontent">
+            <div class="modal-header modalheader-edit">
+                <h4 class="modal-title modaltitle-left">Denetim Kaydı</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body" style="margin-top: -14px;margin-bottom: -10px;">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Şirket Adı</label>
+                            <select id="companyId" onchange="SelectGroup(this.value)" class="selectpicker show-tick show-menu-arrow">
+                                <option value="01">Seçiniz</option>
+                                @foreach (var srk in Model.Companies)
+                                {
+                                    <option value="@srk.CompanyId">@srk.CompanyName</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Kontrol Grup Adı</label>
+                            <select id="selectGroup" style="width:100%;" multiple="multiple"></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>Denetim kaydını başlat</label><input type="checkbox" class="thfirst-check" id="chkControl" style="margin-left:5px" />
+                    </div>
+                </div>
+                <div class="modal-footer" style="padding: 0.3rem;height:40px">
+                    <button type="button" class="btn bg-gradient-danger btn-sm btn-danger-width" data-dismiss="modal">Kapat</button>
+                    <button type="button" class="btn bg-gradient-success btn-sm" id="btnAuditRecord">Kaydet</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var model =@Html.Raw(Json.Encode(Model.CompanyGroups));
+    var groupList =@Html.Raw(Json.Encode(Model.Groups));
+    $("#companyId").selectpicker();
+    $('#selectGroup').select2();
+    console.log("bb");
+    function SelectGroup(companyId) {
+        var varmi = false;
+        var a = 0;
+        var Selected = new Array();
+        $("#selectGroup option").remove();
+        for (var i = 0; i < model.length; i++) {
+            if (model[i].CompanyID.CompanyId == companyId) {
+                    Selected[a] = model[i].GroupID.GroupID;
+                    a++;
+            }
+        }
+        if (Selected == 0) {
+            for (var m = 0; m < groupList.length; m++) {
+                $('#selectGroup').append($('<option>', {
+                    value: groupList[m].GroupID,
+                    text: groupList[m].GroupName
+                }));
+            }
+        }
+        else {
+            for (var k = 0; k < groupList.length; k++) {
+                varmi = false;
+                for (var l = 0; l < Selected.length; l++) {
+                    if (Selected[l] == groupList[k].GroupID) {
+                        varmi = true;
+                    }
+                }
+                if (varmi == false)
+                    $('#selectGroup').append($('<option>', {
+                        value: groupList[k].GroupID,
+                        text: groupList[k].GroupName
+                }));
+            }
+
+        }
+    }
+    $(document).ready(function () {
+        var GroupArray = new Array();
+        var controlId;
+        $("#btnAuditRecord").click(function () {
+            if ($('#chkControl').is(':checked')) {
+                controlId = 1;
+            }
+            else {
+                controlId = 0;
+            }
+            GroupArray = $('#selectGroup').val();
+                var companyId = $("#companyId").val();
+            if (GroupArray.length == 0 && companyId == 01) {
+                toastr.error("Şirket Adı ve Kontrol Grup Adı boş bırakılamaz!");
+                $("#companyId").parent().addClass('RedBorder');
+                borderTime($("#companyId").parent());
+                $(".form-group").children('span').addClass('RedBorder');
+                borderTime($(".form-group").children('span'))
+            }
+            else if (companyId == 01) {
+                toastr.error("Şirket Adı boş bırakılamaz!");
+                toastr.error("Şirket Adı ve Kontrol Grup Adı boş bırakılamaz!");
+                $("#companyId").parent().addClass('RedBorder');
+            }
+            else if (GroupArray.length == 0) {
+                toastr.error("Kontrol Grup Adı boş bırakılamaz!");
+                $(".form-group").children('span').addClass('RedBorder');
+                borderTime($(".form-group").children('span'))
+            }
+            else {
+                $.ajax({
+                    url: '@Url.Action("AddAuditRecord","Company")',
+                    type: 'POST',
+                    data: { Groupid: GroupArray, Companyid: companyId, Controlid: controlId },
+                    success: function (result) {
+                        toastr.options = {
+                            "timeOut": "1000",
+                        };
+                        if (result == "Bu kayıt daha önce eklendi") {
+                            toastr.error("Bu kayıt daha önce eklendi!");
+                        }
+                        else {
+                            toastr.success(result);
+                            $("#createGroupModal").modal('hide');
+                        }
+                    },
+                    error: function (result) {
+                        alert(result);
+                    }
+                });
+            }
+        });
+    });
+</script>

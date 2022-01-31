@@ -1,0 +1,194 @@
+@{
+    ViewBag.Title = "_MainLayout";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Mvc Stok</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="/Kategori/Index">Kategoriler</a></li>
+      <li><a href="/Urun/Index">Ürünler</a></li>
+      <li><a href="/Musteri/Index">Müşteriler</a></li>
+      <li><a href="/Satıs/Index">Satışlar</a></li>
+      <li><a href="/Default/Index">Yardım</a></li>
+    </ul>
+  </div>
+</nav>
+  
+<div class="container">
+  @RenderBody()
+</div>
+
+</body>
+</html>
+
+
+
+
+
+<form class="form-group" method="post">
+    <div>
+        <label>Müşteri adı</label>
+        <input type="text" class="form-control" name="MUSTERIAD" />
+    </div>
+    <div>
+        <label>Müşteri Soyadı</label>
+        <input type="text" class="form-control" name="MUSTERİSOYAD"/>
+    </div>
+    <div style="margin-top:15px">
+        <button class="btn btn-info">Müşteri ekle</button>
+    </div>
+
+</form>
+
+
+
+
+<table class= "table table-bordered">
+    <tr>
+        <th>Kategori ıd</th>
+        <th>Kategori adı</th>
+        <th>SİL</th>
+        <th>GÜNCELLE</th>         
+    </tr>
+    <tbody>
+        @foreach (var ktgr in Model) 
+        {
+            <tr>
+                <th>@ktgr.KATEGORIID</th>
+                <td>@ktgr.KATEGORIAD</td>
+                <td><a href="/Kategori/SIL/@ktgr.KATEGORIID" class="btn btn-danger">SİL</a></td>
+                <td><a href="/Kategori/GUNCELLE/@ktgr.KATEGORIID" class="btn btn-success">GÜNCELLE</a></td>         
+            </tr>         
+        }
+    </tbody>
+</table>
+
+<a href="/Kategori/YeniKategori/" class="btn btn-primary">YENİ KATEGORİ EKLE</a>
+
+
+
+
+
+ public SqlConnection baglanti = new SqlConnection("Data Source=DESKTOP-6JT2BJA;Initial Catalog=AracDatabase;Integrated Security=True");
+       public AracBilgi AracGetir(int Id) {
+
+            AracBilgi getir = new AracBilgi();
+            
+            SqlCommand komut = new SqlCommand();
+            komut.Connection = baglanti;
+            komut.CommandText = "AracGetir";
+            komut.CommandType = CommandType.StoredProcedure;
+            komut.Parameters.AddWithValue("@Aracid", Id);
+            baglanti.Open();
+            SqlDataReader rdr = komut.ExecuteReader();
+            while (rdr.Read())
+            {
+                getir.Aracid = Id;
+                getir.Model = rdr[0].ToString();
+                getir.Plaka = rdr[1].ToString();
+            }
+           baglanti.Close();
+
+           return getir;
+           }
+       public int AracKayit(AracBilgi YeniKayit)
+       {
+           int donus;
+           SqlCommand komut = new SqlCommand();
+           komut.CommandText = "Karsilastir";
+           komut.Connection = baglanti;
+           komut.CommandType = CommandType.StoredProcedure;
+           komut.Parameters.AddWithValue("@Marka", YeniKayit.Marka);
+           komut.Parameters.AddWithValue("@Model", YeniKayit.Model);
+           komut.Parameters.AddWithValue("@Plaka", YeniKayit.Plaka);
+           baglanti.Open();
+           donus = int.Parse(komut.ExecuteScalar().ToString());
+           baglanti.Close();
+           return donus;
+       }
+       public void AracSil(int id) 
+       {
+           SqlCommand komut = new SqlCommand();
+           komut.CommandText = "AracSil";
+           komut.Connection = baglanti;
+           komut.CommandType = CommandType.StoredProcedure;
+           komut.Parameters.AddWithValue("@id",id);
+           baglanti.Open();
+           komut.ExecuteNonQuery();
+           baglanti.Close();
+       }
+       public void AracGuncelle(AracBilgi arac)
+       {
+           SqlCommand komut = new SqlCommand();
+           komut.CommandText = "AracGuncelle";
+           komut.Connection = baglanti;
+           komut.CommandType = CommandType.StoredProcedure;
+           komut.Parameters.AddWithValue("@Aracid", arac.Aracid);
+           komut.Parameters.AddWithValue("@Model", arac.Model);
+           komut.Parameters.AddWithValue("@Plaka", arac.Plaka);
+           baglanti.Open();
+           komut.ExecuteNonQuery();
+           baglanti.Close();
+       }
+       public List<AracBilgi> ButunAraclar()
+       {
+           List<AracBilgi> doldur=new List<AracBilgi>();
+           SqlCommand komut = new SqlCommand();
+           komut.CommandText = "ButunAraclar";
+           komut.Connection = baglanti;
+           komut.CommandType = CommandType.StoredProcedure;
+           baglanti.Open();
+           SqlDataReader rdr = komut.ExecuteReader();
+           while (rdr.Read())
+           {
+               AracBilgi arac = new AracBilgi();
+               arac.Aracid = int.Parse(rdr[0].ToString());
+               arac.Marka = rdr[1].ToString();
+               arac.Model = rdr[2].ToString();
+               arac.Plaka = rdr[3].ToString();
+               doldur.Add(arac);
+           }
+           baglanti.Close();
+           return doldur;
+           
+       }
+       public List<AracBilgi> AracBul(AracBilgi Arac)
+       {
+           List<AracBilgi> doldur = new List<AracBilgi>();
+           
+           SqlCommand komut = new SqlCommand();
+           komut.CommandText = "AracBul";
+           komut.Connection = baglanti;
+           komut.CommandType = CommandType.StoredProcedure;
+           komut.Parameters.AddWithValue("@Marka",Arac.Marka);
+           komut.Parameters.AddWithValue("@Model", Arac.Model);
+           komut.Parameters.AddWithValue("@Plaka", Arac.Plaka);
+           baglanti.Open();
+           SqlDataReader rdr = komut.ExecuteReader();
+           while (rdr.Read())
+           {
+               AracBilgi arac = new AracBilgi();
+               arac.Aracid = int.Parse(rdr[0].ToString());
+               arac.Marka = rdr["Marka"].ToString();
+               arac.Model = rdr[2].ToString();
+               arac.Plaka = rdr[3].ToString();
+               doldur.Add(arac);
+           }
+           baglanti.Close();
+           return doldur;
+       }
+

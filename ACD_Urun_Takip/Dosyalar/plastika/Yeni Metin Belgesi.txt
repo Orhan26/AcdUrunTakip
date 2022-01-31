@@ -1,0 +1,20 @@
+  @foreach (var grpKn in Model.GroupBy(o => o.SirketId.SirketID).ToList())
+                                {
+                                    <tr>
+                                        <td><input id="chk" type="checkbox" value="@grpKn.ToList()[0].SirketId.SirketID" name="chkbox" /></td>
+
+                                        <td id="sadi">@grpKn.ToList()[0].SirketId.SirketAdi</td>
+                                        <td>@grpKn.ToList()[0].ControlID.ControlName</td>
+                                        @foreach (var kn in grpKn)
+                                        {
+
+                                            if (kn.cevap == true)
+                                            {
+                                                <td>  <input type="checkbox" checked="checked" disabled="disabled" class="checkbox" /></td>
+                                            }
+                                            else
+                                            {
+                                                <td>  <input type="checkbox" disabled="disabled" class="checkbox" /></td>
+                                            }
+
+                                        }

@@ -1,0 +1,29 @@
+int cevap;
+            do
+            {
+              
+                int[] sayilar = new int[5];
+                for (int i = 0; i < 5; i++)
+                {
+                    Console.Write("sayi gir=");
+                    sayilar[i] = int.Parse(Console.ReadLine());
+                }
+                int enb = sayilar[0];
+                int enk = sayilar[0];
+                for (int i = 0; i < 5; i++)
+                {
+                    if (sayilar[i] > enb)
+                    {
+                        enb = sayilar[i];
+                    }
+                    if(sayilar[i]<enk)
+                    {
+                        enk = sayilar[i];
+                    }
+                }
+                Console.WriteLine("-----------------------");
+                Console.WriteLine("enb=" + enb);
+                Console.WriteLine("enk=" + enk);
+                Console.WriteLine("devam etmek için (1)--çýkýs(0)=");
+                cevap=int.Parse(Console.ReadLine());
+            } while (cevap == 1 );
